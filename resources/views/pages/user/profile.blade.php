@@ -17,27 +17,23 @@
 @section('link-login'){{ URL::to('/login') }}@endsection
 
 @section('content')
-    <div class="row align-items-center">
 
-        <div class="col-lg-4 mt-n3 order-lg-2 order-1">
-            <div class="mt-n5">
-                <div class="d-flex align-items-center justify-content-center mb-2">
-                    <div class="linear-gradient d-flex align-items-center justify-content-center rounded-circle"
-                        style="width: 110px; height: 110px;" ;="">
-                        <div class="border border-4 border-white d-flex align-items-center justify-content-center rounded-circle overflow-hidden"
-                            style="width: 100px; height: 100px;" ;="">
-                            <img src="{{ asset('/assets/img/toh.jpg') }}" alt=""
-                                class="w-100 h-100">
-                        </div>
-                    </div>
-                </div>
-                <div class="text-center">
-                    <h5 class="fs-5 mb-0 fw-semibold">Mathew Anderson</h5>
-                    <p class="mb-0 fs-4">Designer</p>
-                </div>
+
+
+    <div class="d-flex align-items-center justify-content-center mb-2">
+        <div class="linear-gradient d-flex align-items-center justify-content-center rounded-circle">
+            <div
+                class="border border-4 border-white d-flex align-items-center justify-content-center rounded-circle overflow-hidden">
+                <img src="{{ asset('/assets/img/toh.jpg') }}" alt="">
             </div>
         </div>
     </div>
+    <div class="text-center">
+        <h5 class="fs-5 mb-0 fw-semibold">Mathew Anderson</h5>
+        <p class="mb-0 fs-4">Designer</p>
+    </div>
+
+
 
     <div class="mx-4 mt-4">
         <ul class="nav nav-tabs d-flex justify-content-center" id="myTab" role="tablist">
@@ -107,8 +103,7 @@
             </div>
 
 
-            <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab"
-                tabindex="0">
+            <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
 
 
                 <section class="h-100 h-custom bg-dark-subtle bg-gradient">
