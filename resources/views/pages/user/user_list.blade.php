@@ -66,6 +66,15 @@
                         <form action="" method="">
                             @csrf
                             <input type="hidden" name="event_id" value="" autocomplete="off">
+
+                            <div class="form-floating mb-3 has-danger">
+                                <input value="" type="text" name="event_title"
+                                    class="form-control is-invalid"
+                                    placeholder="Birthday Party">
+                                <label>Name</label>
+                                    <div class="invalid-feedback text-start">test</div>
+                            </div>
+
                             <div class="form-floating mb-3 has-danger">
                                 <input value="" type="text" name="event_title"
                                     class="form-control is-invalid"
@@ -90,6 +99,17 @@
                                     <option>KD</option>
                                 </select>
                                 <label>Branch</label>
+                                <div class="invalid-feedback text-start">test</div>
+
+                            </div>
+
+                            <div class="form-floating mb-3 has-danger">
+
+                                <select name="" class="form-select form-control is-invalid">
+                                    <option>Admin</option>
+                                    <option>Doctor</option>
+                                </select>
+                                <label>Role</label>
                                 <div class="invalid-feedback text-start">test</div>
 
                             </div>
