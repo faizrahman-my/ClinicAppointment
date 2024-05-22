@@ -146,39 +146,6 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="accordion accordion-flush" id="accordionFlushExample">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#flush-collapseOne" aria-expanded="false"
-                                        aria-controls="flush-collapseOne">
-                                        Feedback Form
-                                    </button>
-                                </h2>
-                                <div id="flush-collapseOne" class="accordion-collapse collapse"
-                                    data-bs-parent="#accordionFlushExample">
-                                    <div class="accordion-body">
-                                        <form action="#" method="post">
-                                            <div class="mb-3">
-                                                <label for="name" class="form-label">Name</label>
-                                                <input type="text" class="form-control" id="name" name="name"
-                                                    required>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="email" class="form-label">Email</label>
-                                                <input type="email" class="form-control" id="email" name="email"
-                                                    required>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="feedback" class="form-label">Feedback</label>
-                                                <textarea class="form-control" id="feedback" name="feedback" required></textarea>
-                                            </div>
-                                            <button type="submit" class="btn btn-primary">Submit</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
 
                         <section id="review" class="py-5">
