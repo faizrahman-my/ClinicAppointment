@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('appointments', function (Blueprint $table) {
             $table->id();
             $table->date('reservation_date');
+            $table->string('reservation_status');
             $table->string('status');
             $table->mediumText('doctor_desc')->nullable();
             $table->mediumText('doctor_comment')->nullable();
