@@ -13,10 +13,7 @@ return new class extends Migration
     {
         Schema::create('staff', function (Blueprint $table) {
             $table->id();
-            $table->text('name');
-            $table->string('username');
-            $table->string('email');
-            $table->string('password');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('clinic_id')->constrained()->onDelete('cascade');
             $table->boolean('is_admin')->default(0);
             $table->timestamps();
