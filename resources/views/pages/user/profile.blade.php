@@ -29,7 +29,7 @@
         </div>
     </div>
     <div class="text-center">
-        <h5 class="fs-5 mb-0 fw-semibold">Mathew Anderson</h5>
+        <h5 class="fs-5 mb-0 fw-semibold">{{session()->has('name') ? session('name').session('a') : "unknown"}}</h5>
         <p class="mb-0 fs-4">Designer</p>
     </div>
 

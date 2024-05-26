@@ -16,6 +16,8 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('clinic_id')->constrained()->onDelete('cascade');
             $table->boolean('is_admin')->default(0);
+            $table->boolean('is_staff')->default(1)->nullable();
+            $table->unique(['user_id']);
             $table->timestamps();
         });
     }

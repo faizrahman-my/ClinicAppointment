@@ -28,39 +28,46 @@
 
                                     <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
 
-                                    <form class="mx-1 mx-md-4">
+                                    <form class="mx-1 mx-md-4" action="{{ URL::to('register') }}" method="POST">
+                                        @method('post')
+                                        @csrf
+
+                                        <div class="form-floating mb-3 has-danger">
+                                            <input value="{{ old('name') }}" type="text" name="name"
+                                                class="form-control @error('name')is-invalid @enderror"
+                                                placeholder="jimmy a/l neutron">
+                                            <label>Name</label>
+                                            <div class="invalid-feedback text-start"> 
+                                                @error('name'){{$message}}@enderror
+                                            </div>
+                                        </div>
 
                                         <div class="form-floating mb-3 has-danger">
                                             <input value="{{ old('username') }}" type="text" name="username"
-                                                class="form-control is-invalid"
+                                                class="form-control @error('username')is-invalid @enderror"
                                                 placeholder="jimmyneutron">
                                             <label>Username</label>
                                             <div class="invalid-feedback text-start"> 
-                                                test
+                                                @error('username'){{$message}}@enderror
                                             </div>
                                         </div>
                                         <div class="form-floating mb-3 has-danger">
                                             <input value="{{ old('email') }}" type="email" name="email"
-                                                class="form-control is-invalid"
+                                                class="form-control @error('email')is-invalid @enderror"
                                                 placeholder="name@example.com">
                                             <label>Email</label>
                                             <div class="invalid-feedback text-start">
-                                                test
+                                                @error('email'){{$message}}@enderror
                                             </div>
                                         </div>
                                         <div class="form-floating mb-3 has-danger">
                                             <input type="password" name="password"
-                                                class="form-control is-invalid"
+                                                class="form-control @error('password')is-invalid @enderror"
                                                 placeholder="Password">
                                             <label>Password</label>
                                             <div class="invalid-feedback text-start">
-                                                test
+                                                @error('password'){{$message}}@enderror
                                             </div>
-                                        </div>
-                                        <div class="form-floating mb-3">
-                                            <input type="password" name="password_confirmation" class="form-control"
-                                                placeholder="Password Confirmation">
-                                            <label>Confirm Password</label>
                                         </div>
 
                                         <!-- Submit button -->

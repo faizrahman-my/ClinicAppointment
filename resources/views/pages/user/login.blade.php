@@ -28,25 +28,32 @@
 
                                     <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign in</p>
 
-                                    <form class="mx-1 mx-md-4">
+                                    <form class="mx-1 mx-md-4" action="{{ URL::to('login') }}" method="post">
+                                        @method('post')
+                                        @csrf
 
                                         <div class="form-floating mb-3">
-                                            <input type="text"
-                                                class="form-control is-invalid"
-                                                name="login_user" placeholder="Email/Username">
+                                            <input type="text" class="form-control @error('username')is-invalid @enderror" name="username"
+                                                placeholder="Email/Username">
                                             <label for="floatingInput">Email/Username</label>
                                             <div class="invalid-feedback text-start">
-                                                test
+                                                @error('username')
+                                                    {{ $message }}
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="form-floating mb-3">
-                                            <input type="password"
-                                                class="form-control is-invalid"
-                                                name="login_password" placeholder="Password" autocomplete="off">
+                                            <input type="password" class="form-control @error('password')is-invalid @enderror" name="password"
+                                                placeholder="Password" autocomplete="off">
                                             <label for="floatingPassword">Password</label>
                                             <div class="invalid-feedback text-start">
-                                                test
+                                                @error('password')
+                                                    {{ $message }}
+                                                @enderror
                                             </div>
+                                            @if (session()->has('error'))
+                                                <p class="text-danger small">{{ session('error') }}</p>
+                                            @endif
 
                                         </div>
 

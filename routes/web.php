@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\ClinicController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,88 +17,33 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //static + db
-Route::get('/', function () {
-    return view('pages/index');
-});
 
-Route::get('/about', function () {
-    return view('pages/about');
-});
-
-Route::get('/service', function () {
-    return view('pages/service');
-});
-
-Route::get('/doctor', function () {
-    $doctor_list = array(
-        array(
-            "name" => "John Doe",
-            "role" => "Developer",
-            "email" => "john.doe@example.com",
-            "image"=> "toh.jpg"
-        ),
-        array(
-            "name" => "Jane Smith",
-            "role" => "Designer",
-            "email" => "jane.smith@example.com",
-            "image"=> "toh.jpg"
-        ),
-        array(
-            "name" => "Mike Johnson",
-            "role" => "Manager",
-            "email" => "mike.johnson@example.com",
-            "image"=> "toh.jpg"
-        )
-    );
-    return view('pages/doctor', compact('doctor_list'));
-});
-
-Route::get('/branch', function () {
-    return view('pages/branch');
-});
+Route::get('/', [ClinicController::class, 'index']);
+Route::get('about', [ClinicController::class, 'about']);
+Route::get('service', [ClinicController::class, 'service']);
+Route::get('doctor', [ClinicController::class, 'doctor']);
+Route::get('branch', [ClinicController::class, 'branch']);
 
 
 //db
-Route::get('/login', function () {
-    return view('pages/user/login');
-});
+Route::get('login', [UserController::class, 'index']);
+Route::post('login', [UserController::class, 'redirectLoginUser']);
+Route::get('register', [UserController::class, 'register']);
+Route::post('register', [UserController::class, 'createNewAccount']);
+Route::get('profile', [UserController::class, 'profile'])->middleware('clinic.user');
+Route::post('logout', [UserController::class, 'logout']);
 
-Route::get('/register', function () {
-    return view('pages/user/register');
-});
+Route::get('users', [AdminController::class, 'index']);
+Route::get('users/{id}', [AdminController::class, 'manageUser']);
 
-Route::get('/profile', function () {
-    return view('pages/user/profile');
-});
-
-Route::get('/users', function () {
-    return view('pages/user/user_list');
-});
-
-Route::get('/users/{id}', function ($id) {
-    return view('pages/user/manage_user', ['id'=> $id]);
-});
-
-Route::get('/appointment', function () {
-    return view('pages/appointment/index');
-});
-
-Route::get('/appointment/reserve', function () {
-    return view('pages/appointment/reserve');
-});
-
-Route::get('/appointment/status/{id}', function ($id) {
-    return view('pages/appointment/status', ['id'=> $id]);
-});
-
-Route::get('/appointment/detail/{id}', function ($id) {
-    return view('pages/appointment/detail', ['id'=> $id]);
-});
-
-Route::get('/appointment/admin', function () {
-    return view('pages/appointment/admin');
-});
-
-Route::get('/appointment/doctor', function () {
-    return view('pages/appointment/doctor');
-});
+Route::get('appointment', [AppointmentController::class, 'index'])->middleware('clinic.patient');
+Route::delete('appointment/{id}', [AppointmentController::class, 'cancelReservation'])->middleware('clinic.patient');
+Route::get('appointment/reserve', [AppointmentController::class, 'reserve'])->middleware('clinic.patient');
+Route::post('appointment/reserve', [AppointmentController::class, 'setReservation'])->middleware('clinic.patient');
+Route::get('appointment/status/{id}', [AppointmentController::class, 'status'])->middleware('clinic.patient');
+Route::get('appointment/detail/{id}', [AppointmentController::class, 'detail'])->middleware('clinic.patient');
+Route::get('appointment/admin', [AppointmentController::class, 'approval']);
+Route::put('appointment/admin/approve/{id}', [AppointmentController::class, 'setApprove']);
+Route::put('appointment/admin/reject/{id}', [AppointmentController::class, 'setReject']);
+Route::get('appointment/doctor', [AppointmentController::class, 'manage']);
+Route::put('appointment/doctor/{id}', [AppointmentController::class, 'updateStatus']);

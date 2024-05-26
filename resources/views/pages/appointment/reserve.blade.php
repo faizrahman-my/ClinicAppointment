@@ -39,52 +39,74 @@
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-8">
                         <h2 class="fw-bold mb-5">Set Your Appointment</h2>
-                        <form action="" method="">
+                        <form action="{{ URL::to('appointment/reserve') }}" method="post">
+                            @method('post')
+                            @csrf
+
+                            <input type="hidden" name="username" value="{{ session('username') }}" autocomplete="off">
 
                             <div class="form-floating mb-3 has-danger">
-                                <input value="" type="date" name="" class="form-control is-invalid "
+                                <input value="" type="date" name="appointment_date"
+                                    class="form-control @error('appointment_date')is-invalid @enderror"
                                     placeholder="Start Date">
                                 <label>Appointment Date</label>
-                                <div class="invalid-feedback text-start">test</div>
+                                <div class="invalid-feedback text-start">
+                                    @error('appointment_date')
+                                        {{ $message }}
+                                    @enderror
+                                </div>
 
                             </div>
 
                             <div class="form-floating mb-3 has-danger">
 
-                                <select name="" class="form-select form-control is-invalid">
-                                    <option>Morning</option>
-                                    <option>Afternoon</option>
-                                    <option>Evening</option>
-                                    <option>Night</option>
+                                <select name="appointment_time"
+                                    class="form-select form-control @error('appointment_time')is-invalid @enderror">
+                                    @foreach ($time_list as $time)
+                                        <option>{{ $time }}</option>
+                                    @endforeach
                                 </select>
                                 <label>Appointment Time</label>
-                                <div class="invalid-feedback text-start">test</div>
+                                <div class="invalid-feedback text-start">
+                                    @error('appointment_time')
+                                        {{ $message }}
+                                    @enderror
+                                </div>
 
                             </div>
 
 
                             <div class="form-floating mb-3 has-danger">
 
-                                <select name="" class="form-select form-control is-invalid">
-                                    <option>XRay</option>
-                                    <option>Urine Test</option>
-                                    <option>Blood Donor</option>
-                                    <option>Medical Checkup Only</option>
+                                <select name="service_type"
+                                    class="form-select form-control @error('service_type')is-invalid @enderror">
+                                    @foreach ($service_list as $service)
+                                        <option value="{{ $service }}">{{ $service }}</option>
+                                    @endforeach
                                 </select>
                                 <label>Services Type</label>
-                                <div class="invalid-feedback text-start">test</div>
+                                <div class="invalid-feedback text-start">
+                                    @error('service_type')
+                                        {{ $message }}
+                                    @enderror
+                                </div>
 
                             </div>
 
                             <div class="form-floating mb-3 has-danger">
 
-                                <select name="" class="form-select form-control is-invalid">
-                                    <option>Pj</option>
-                                    <option>Shah Alam</option>
-                                    <option>KD</option>
+                                <select name="clinic_branch"
+                                    class="form-select form-control @error('clinic_branch')is-invalid @enderror">
+                                    @foreach ($clinic_list as $clinic)
+                                        <option value="{{ $clinic->id }}">{{ $clinic->branch }}</option>
+                                    @endforeach
                                 </select>
                                 <label>Clinic Branch</label>
-                                <div class="invalid-feedback text-start">test</div>
+                                <div class="invalid-feedback text-start">
+                                    @error('clinic_branch')
+                                        {{ $message }}
+                                    @enderror
+                                </div>
 
                             </div>
 
@@ -100,6 +122,6 @@
 
     </div>
 
-    
+
 
 @endsection

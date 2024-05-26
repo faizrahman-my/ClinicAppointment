@@ -70,7 +70,10 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Kuala_Lumpur',
+
+    // echo out this to check the timezone date('Y/m/d H:i:s')
+    // https://www.w3schools.com/php/php_ref_timezones.asp
 
     /*
     |--------------------------------------------------------------------------

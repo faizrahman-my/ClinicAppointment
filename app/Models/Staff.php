@@ -12,6 +12,7 @@ class Staff extends Model
     protected $fillable = [
         'user_id',
         'clinic_id',
-        'is_admin'
+        'is_admin',
+        'is_staff'
     ];
 }

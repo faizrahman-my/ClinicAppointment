@@ -7,9 +7,6 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarColor02">
             <ul class="navbar-nav mx-auto">
-                {{-- <li class="nav-item ps-lg-3">
-                    <a class="nav-link @yield('home-active')" href="@yield('link-home')">Home</a>
-                </li> --}}
                 <li class="nav-item ps-lg-3">
                     <a class="nav-link @yield('about-active')" href="@yield('link-about')">About</a>
                 </li>
@@ -30,10 +27,15 @@
                         aria-haspopup="true" aria-expanded="false"></a>
                     <div class="dropdown-menu">
 
-                        <a class="dropdown-item @yield('account-active')" href="@yield('link-account')">nama</a>
+                        @if (session()->has('username'))
+                            <a class="dropdown-item @yield('account-active')"
+                                href="@yield('link-account')">{{ session('username') }}</a>
+                        @endif
                         <a class="dropdown-item @yield('manageuser-active')" href="@yield('link-manageuser')">Manage User</a>
                         <a class="dropdown-item @yield('myappointment-active')" href="@yield('link-myappointment')">My Appointment</a>
-                        <form action="" method="">
+                        <form action="{{ URL::to('logout') }}" method="post">
+                            @method('post')
+                            @csrf
                             <button type="submit" class="dropdown-item">Sign Out</button>
                         </form>
                         <a class="dropdown-item @yield('login-active')" href="@yield('link-login')">Sign In</a>

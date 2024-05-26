@@ -38,47 +38,61 @@
                 <div class="col-lg-12">
                     <div>
 
-                        <div class="page-wrap d-flex flex-row align-items-center">
-                            <div class="container">
-                                <div class="row justify-content-center">
-                                    <div class="col-md-12 text-center">
-                                        <span class="display-5 d-block my-5">No Appointment Found</span>
-                                        <a href="{{ URL::to('/appointment/reserve') }}"
-                                            class="btn btn-outline-primary">Make New Appointment</a>
+
+
+                        @if ($appointment_list)
+                            @foreach ($appointment_list as $appointment)
+                                <div class="card mt-4">
+                                    <div class="p-4 card-body">
+                                        <div class="align-items-center row">
+                                            <div class="col-md-5 col-12">
+                                                <div class="mt-3 mt-lg-0">
+                                                    <h5 class="fs-19 mb-0">
+                                                        <a class="primary-link"
+                                                            href="{{ URL::to('/appointment/status/') }}/{{ $appointment['id'] }}">{{ $appointment['reason'] }}</a>
+                                                    </h5>
+                                                    <p class="text-muted my-1">
+                                                        {{ $appointment['staff'] }}
+                                                    </p>
+                                                    <ul class="list-inline mb-0 text-muted mb-2">
+                                                        <li class="list-inline-item"> {{ $appointment['clinic'] }}</li>
+                                                        <li class="list-inline-item"> {{ $appointment['date'] }}</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-7 d-flex justify-content-md-end">
+                                                <div class="row text-center">
+                                                    <p class="badge bg-danger">{{ ucwords($appointment['status']) }}</p>
+                                                    @if ($appointment['status'] == 'pending')
+                                                        <form action="{{ URL::to('appointment') }}/{{ $appointment['id'] }}" method="post">
+                                                            @method('delete')
+                                                            @csrf
+                                                            <button type="submit"
+                                                                class="btn btn-outline-primary">Cancel</button>
+                                                        </form>
+                                                    @endif
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @else
+                            <div class="page-wrap d-flex flex-row align-items-center">
+                                <div class="container">
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-12 text-center">
+                                            <span class="display-5 d-block my-5">No Appointment Found</span>
+                                            <a href="{{ URL::to('/appointment/reserve') }}"
+                                                class="btn btn-outline-primary">Make New Appointment</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        @endif
 
 
-                        <div class="card mt-4">
-                            <div class="p-4 card-body">
-                                <div class="align-items-center row">
-                                    <div class="col-md-5 col-12">
-                                        <div class="mt-3 mt-lg-0">
-                                            <h5 class="fs-19 mb-0">
-                                                <a class="primary-link"
-                                                    href="{{ URL::to('/appointment/status/abc123') }}">xray</a>
-                                            </h5>
-                                            <p class="text-muted my-1">
-                                                dr joe
-                                            </p>
-                                            <ul class="list-inline mb-0 text-muted mb-2">
-                                                <li class="list-inline-item"> PJ</li>
-                                                <li class="list-inline-item"> 12/02/2024</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-7 d-flex justify-content-md-end">
-                                        <div class="row">
-                                            <p class="badge bg-danger">status</p>
-                                            <a href="" class="btn btn-outline-primary text-center">Cancel</a>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
 
                     </div>

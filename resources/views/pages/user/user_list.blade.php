@@ -43,9 +43,44 @@
                     </div>
                 </div>
                 <div class="ms-4">
-                    <span class="badge bg-light text-dark me-3">Doctor</span>
-                    <a href="" class="btn btn-outline-success">Enable</a>
-                    <a href="" class="btn btn-outline-primary">Disable</a>
+                    <span class="badge bg-light text-dark me-3">user</span>
+
+                    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                        <button type="button" class="btn btn-primary">Manage</button>
+                        <div class="btn-group" role="group">
+                            <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+
+                                <form action="" method="">
+                                    {{ method_field('PUT') }}
+                                    @csrf
+                                    <input type="hidden" name="task_id" value="" autocomplete="off">
+                                    <button type="submit" class="dropdown-item">In
+                                        Progress</button>
+                                </form>
+
+                                <form action="" method="">
+                                    {{ method_field('PUT') }}
+                                    @csrf
+                                    <input type="hidden" name="task_id" value="" autocomplete="off">
+                                    <button type="submit" class="dropdown-item">Completed</button>
+                                </form>
+
+
+                                <form action="" method="">
+                                    {{ method_field('DELETE') }}
+                                    @csrf
+                                    <input type="hidden" name="task_id" value="" autocomplete="off">
+                                    <button type="submit" class="dropdown-item">Delete</button>
+                                </form>
+
+                                <a href="" class="dropdown-item">Remove Account</a>
+
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
@@ -68,27 +103,24 @@
                             <input type="hidden" name="event_id" value="" autocomplete="off">
 
                             <div class="form-floating mb-3 has-danger">
-                                <input value="" type="text" name="event_title"
-                                    class="form-control is-invalid"
+                                <input value="" type="text" name="event_title" class="form-control is-invalid"
                                     placeholder="Birthday Party">
                                 <label>Name</label>
-                                    <div class="invalid-feedback text-start">test</div>
+                                <div class="invalid-feedback text-start">test</div>
                             </div>
 
                             <div class="form-floating mb-3 has-danger">
-                                <input value="" type="text" name="event_title"
-                                    class="form-control is-invalid"
+                                <input value="" type="text" name="event_title" class="form-control is-invalid"
                                     placeholder="Birthday Party">
                                 <label>Username</label>
-                                    <div class="invalid-feedback text-start">test</div>
+                                <div class="invalid-feedback text-start">test</div>
                             </div>
 
                             <div class="form-floating mb-3 has-danger">
-                                <input value="" type="text" name="event_title"
-                                    class="form-control is-invalid"
+                                <input value="" type="text" name="event_title" class="form-control is-invalid"
                                     placeholder="Birthday Party">
                                 <label>Email</label>
-                                    <div class="invalid-feedback text-start">test</div>
+                                <div class="invalid-feedback text-start">test</div>
                             </div>
 
                             <div class="form-floating mb-3 has-danger">

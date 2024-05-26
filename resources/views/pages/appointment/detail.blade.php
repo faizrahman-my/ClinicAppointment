@@ -36,7 +36,7 @@
             <div class="card-body">
 
                 <div class="card-header">
-                    Branch Name
+                    {{ ucfirst($appointment['clinic']) }}
                 </div>
 
                 <div class="card-body">
@@ -44,49 +44,49 @@
                     <div class="row mb-2">
                         <div class="col-md-3 fw-bold">Doctor Name. :</div>
                         <div class="col-md-9">
-                            <p>s</p>
+                            <p>Doctor {{ $appointment['staff'] }}</p>
                         </div>
                     </div>
 
                     <div class="row mb-4">
                         <div class="col-md-3 fw-bold">Date:</div>
                         <div class="col-md-9">
-                            1/5/2024
+                            {{ $appointment['date'] }}
                         </div>
                     </div>
 
                     <div class="row mb-2">
                         <div class="col-md-3 fw-bold">Time:</div>
                         <div class="col-md-9">
-                            <p>s</p>
+                            <p>{{ $appointment['time'] }}</p>
                         </div>
                     </div>
 
                     <div class="row mb-2">
                         <div class="col-md-3 fw-bold">Services:</div>
                         <div class="col-md-9">
-                            <p>s</p>
+                            <p>{{ $appointment['reason'] }}</p>
                         </div>
                     </div>
 
                     <div class="row mb-2">
                         <div class="col-md-3 fw-bold">Room No. :</div>
                         <div class="col-md-9">
-                            <p>s</p>
+                            <p>{{ $appointment['room'] }}</p>
                         </div>
                     </div>
 
                     <div class="row mb-2">
                         <div class="col-md-3 fw-bold">Status :</div>
                         <div class="col-md-9">
-                            <p>s</p>
+                            <p>{{ ucwords($appointment['status']) }}</p>
                         </div>
                     </div>
 
                     <div class="row mb-2">
                         <div class="col-md-3 fw-bold">Comment :</div>
                         <div class="col-md-9">
-                            <p>s</p>
+                            {!! nl2br($appointment['comment']) !!}
                         </div>
                     </div>
 

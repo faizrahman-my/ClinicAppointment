@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('clinics', function (Blueprint $table) {
             $table->id();
             $table->text('branch');
-            $table->mediumText('address');
+            $table->mediumText('address')->nullable();
             $table->timestamps();
         });
     }

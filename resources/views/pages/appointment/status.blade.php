@@ -38,61 +38,63 @@
                 <div class="row mb-2">
                     <div class="col-md-3 fw-bold">Date:</div>
                     <div class="col-md-9">
-                        1/2/2024
+                        {{ $appointment['date'] }}
                     </div>
                 </div>
 
                 <div class="row mb-2">
                     <div class="col-md-3 fw-bold">Time:</div>
                     <div class="col-md-9">
-                        <p>12:31 AM</p>
+                        <p>{{ $appointment['time'] }}</p>
                     </div>
                 </div>
 
                 <div class="row mb-2">
                     <div class="col-md-3 fw-bold">Services:</div>
                     <div class="col-md-9">
-                        <p>Medical Checkup</p>
+                        <p>{{ $appointment['reason'] }}</p>
                     </div>
                 </div>
 
                 <div class="row mb-2">
                     <div class="col-md-3 fw-bold">Branch:</div>
                     <div class="col-md-9">
-                        <p>Kota Damansara</p>
+                        <p>{{ $appointment['clinic'] }}</p>
                     </div>
                 </div>
 
                 <div class="row mb-2">
                     <div class="col-md-3 fw-bold">Address:</div>
                     <div class="col-md-9">
-                        12, Jalan Flora
+                        {{ $appointment['address'] }}
                     </div>
                 </div>
 
 
 
             </div>
-            <div class="card-footer text-center p-0">
+            <div class="card-footer text-center">
                 <div class="row">
-                    <div class="d-flex col-12 col-md-4 flex-column py-3">
-                        <div class="mb-3">Fill in the form again</div>
-                        <a class="btn btn-outline-warning fw-bold fs-5 mx-5"
-                            href="{{ URL::to('/appointment/reserve') }}">&#x1F844;</a>
-                    </div>
-                    <div class="d-flex col-12 col-md-4 flex-column py-3 bg-dark text-white">
+                    @if ($appointment['status'] == 'rejected')
+                        <div class="d-flex col-12 flex-column py-3">
+                            <div class="mb-3">Fill in the form again</div>
+                            <a class="btn btn-outline-warning fw-bold fs-5 mx-5"
+                                href="{{ URL::to('/appointment/reserve') }}">&#x1F844;</a>
+                        </div>
+                    @endif
+
+                    <div class="d-flex col-12 flex-column py-3 bg-dark text-white">
                         <div class="mb-3">Status</div>
-                        <div class="fw-bold">Pending/Approve/Reject</div>
+                        <div class="fw-bold">{{ ucfirst($appointment['status']) }}</div>
                     </div>
-                    <div class="d-flex col-12 col-md-4 flex-column py-3">
-                        <div class="mb-3">Check my appointment</div>
-                        <a class="btn btn-outline-success fw-bold fs-5 mx-5"
-                            href="{{ URL::to('/appointment/detail/abc123') }}">&#x1F846;</a>
-                    </div>
+                    @if ($appointment['status'] == 'approved')
+                        <div class="d-flex col-12 flex-column py-3">
+                            <div class="mb-3">Check my appointment</div>
+                            <a class="btn btn-outline-success fw-bold fs-5 mx-5"
+                                href="{{ URL::to('/appointment/detail') }}/{{ $id }}">&#x1F846;</a>
+                        </div>
+                    @endif
                 </div>
-            </div>
-            <div class="card-footer bg-danger text-white text-center">
-                {{ $id }}
             </div>
         </div>
     </div>
