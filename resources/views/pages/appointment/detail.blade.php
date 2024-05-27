@@ -92,6 +92,8 @@
 
                 </div>
 
+
+
                 <div class="card-footer text-center">
                     {{ $id }}
 
@@ -108,13 +110,30 @@
                             <div id="flush-collapseOne" class="accordion-collapse collapse"
                                 data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body">
-                                    <form action="#" method="post">
-                                        <div class="mb-3">
-                                            <label for="feedback" class="form-label">Feedback</label>
-                                            <textarea class="form-control" id="feedback" name="feedback" required></textarea>
+
+                                    @if ($rating)
+                                        <div class="row">
+                                            <p class="col-6 d-flex justify-content-start">{{ nl2br($rating->feedback) }}
+                                            </p>
+                                            <div class="col-6 d-flex justify-content-end">
+                                                <form action="{{ URL::to('rating') }}/{{ $rating->id }}?id={{$id}}" method="post">
+                                                    @method('delete')
+                                                    @csrf
+                                                    <button class="btn btn-primary">delete</button>
+                                                </form>
+                                            </div>
                                         </div>
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                    </form>
+                                    @else
+                                        <form action="{{ URL::to('rating') }}/{{ $id }}" method="post">
+                                            @method('post')
+                                            @csrf
+                                            <div class="mb-3">
+                                                <label for="feedback" class="form-label">Feedback</label>
+                                                <textarea class="form-control" id="feedback" name="feedback" required></textarea>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </form>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -122,6 +141,8 @@
 
 
                 </div>
+
+
 
             </div>
 

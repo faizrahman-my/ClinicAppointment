@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Appointment;
 use App\Models\Clinic;
+use App\Models\Rating;
 use App\Models\Staff;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -104,6 +105,11 @@ class AppointmentController extends Controller
             'status' => $appointment->reservation_status == 'approved' ? $appointment->status : $appointment->reservation_status,
             'comment' => $appointment->doctor_comment,
         ];
+        
+        //get rating count row
+        $userLookupUname = $user->keyBy('username');
+        $user_id = $userLookupUname[session('username')]->id;
+        $data['rating'] = Rating::where('user_id', $user_id)->where('appointment_id', base64_decode($id))->first();
 
         $data['appointment'] = $my_apt ?? [];
         $data['id'] = $id;

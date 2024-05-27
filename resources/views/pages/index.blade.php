@@ -16,7 +16,8 @@
 
 @section('content')
 
-    <section class="py-5 mb-md-5 mt-2 mx-3 bg-opacity-50" style="background-image: url('{{ asset('/assets/img/tah.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+    <section class="py-5 mb-md-5 mt-2 mx-3 bg-opacity-50"
+        style="background-image: url('{{ asset('/assets/img/tah.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
         <div class="container">
             <div class="row justify-content-center text-center text-white py-4">
                 <div class="col-lg-8">
@@ -89,39 +90,28 @@
                 <h2 class="text-center mb-4">Reviews</h2>
                 <!-- Insert dynamic review content here -->
                 <div class="row justify-content-center">
-                    <div class="col-md-4">
-                        <div class="card mb-3 border">
-                            <div class="card-body">
-                                <h5 class="card-title">John Doe</h5>
-                                <p class="card-text">"Great experience at Klinik Azalea! The staff was friendly and the
-                                    doctors
-                                    were very knowledgeable. Highly recommend!"</p>
+
+                    @foreach ($recent_rating as $recent)
+                        <div class="col-md-4">
+                            <div class="card mb-3 border">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <h5 class="card-title">{{ $recent['name'] }}</h5>
+                                        </div>
+                                        <div class="col-6">
+                                            <p class="text-muted fs-6 fw-light text-end">
+                                                {{ $recent['clinic'] }}</p>
+                                        </div>
+                                    </div>
+                                    <p class="card-text text-truncate">"{{ $recent['feedback'] }}"</p>
+                                </div>
                             </div>
+                            <!-- Add more review cards here if needed -->
                         </div>
-                        <!-- Add more review cards here if needed -->
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card mb-3 border">
-                            <div class="card-body">
-                                <h5 class="card-title">John Doe</h5>
-                                <p class="card-text">"Great experience at Klinik Azalea! The staff was friendly and the
-                                    doctors
-                                    were very knowledgeable. Highly recommend!"</p>
-                            </div>
-                        </div>
-                        <!-- Add more review cards here if needed -->
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card mb-3 border">
-                            <div class="card-body">
-                                <h5 class="card-title">John Doe</h5>
-                                <p class="card-text">"Great experience at Klinik Azalea! The staff was friendly and the
-                                    doctors
-                                    were very knowledgeable. Highly recommend!"</p>
-                            </div>
-                        </div>
-                        <!-- Add more review cards here if needed -->
-                    </div>
+                    @endforeach
+
+
                 </div>
 
                 <div class="row justify-content-center">
@@ -154,34 +144,26 @@
                                 <!-- Insert dynamic review content here -->
                                 <div class="row justify-content-center">
                                     <div>
-                                        <div class="card mb-3 border">
-                                            <div class="card-body">
-                                                <h5 class="card-title">John Doe</h5>
-                                                <p class="card-text">"Great experience at Klinik Azalea! The staff was
-                                                    friendly and the
-                                                    doctors
-                                                    were very knowledgeable. Highly recommend!"</p>
-                                            </div>
-                                        </div>
-                                        <div class="card mb-3 border">
-                                            <div class="card-body">
-                                                <h5 class="card-title">John Doe</h5>
-                                                <p class="card-text">"Great experience at Klinik Azalea! The staff was
-                                                    friendly and the
-                                                    doctors
-                                                    were very knowledgeable. Highly recommend!"</p>
-                                            </div>
-                                        </div>
+                                        @foreach ($all_rating as $all)
+                                            <div class="card mb-3 border">
+                                                <div class="card-body">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <h5 class="card-title">{{ $all['name'] }}</h5>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <p class="text-muted fs-6 fw-light text-end">
+                                                                {{ $all['clinic'] }} | {{ $all['date'] }}</p>
+                                                        </div>
+                                                    </div>
 
-                                        <div class="card mb-3 border">
-                                            <div class="card-body">
-                                                <h5 class="card-title">John Doe</h5>
-                                                <p class="card-text">"Great experience at Klinik Azalea! The staff was
-                                                    friendly and the
-                                                    doctors
-                                                    were very knowledgeable. Highly recommend!"</p>
+                                                    <p class="card-text">"{!! nl2br($all['feedback']) !!}"</p>
+                                                </div>
                                             </div>
-                                        </div>
+                                        @endforeach
+
+
+
                                         <!-- Add more review cards here if needed -->
                                     </div>
                                 </div>
