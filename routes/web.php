@@ -32,10 +32,14 @@ Route::post('login', [UserController::class, 'redirectLoginUser']);
 Route::get('register', [UserController::class, 'register']);
 Route::post('register', [UserController::class, 'createNewAccount']);
 Route::get('profile', [UserController::class, 'profile'])->middleware('clinic.user');
+Route::put('profile', [UserController::class, 'updateProfile'])->middleware('clinic.user');
+Route::put('profile/password', [UserController::class, 'changePassword'])->middleware('clinic.user');
 Route::post('logout', [UserController::class, 'logout']);
 
 Route::get('users', [AdminController::class, 'index']);
 Route::get('users/{id}', [AdminController::class, 'manageUser']);
+Route::post('users', [AdminController::class, 'createStaffAccount']);
+
 
 Route::get('appointment', [AppointmentController::class, 'index'])->middleware('clinic.patient');
 Route::delete('appointment/{id}', [AppointmentController::class, 'cancelReservation'])->middleware('clinic.patient');

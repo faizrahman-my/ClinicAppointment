@@ -91,4 +91,35 @@ class UserController extends Controller
 
         return redirect('/appointment');
     }
+
+    public function updateProfile(Request $request)
+    {
+
+        $input = $request->validate([
+            'name' => 'nullable',
+            'username' => 'nullable|min:4|max:20|unique:users,username|alpha_dash',
+            'email' => 'nullable|email|unique:users,email',
+        ]);
+        $user = User::where('username', session('username'))->first();
+        if($input['name']){
+            $user->name = $input['name'];
+            $request->session()->put('name', $input['name']);
+        }
+        if($input['username']){
+            $user->username = $input['username'];
+            $request->session()->put('username', $input['username']);
+        }
+        if($input['email']){
+            $user->email = $input['email'];
+            $request->session()->put('email', $input['email']);
+        }
+
+        $user->save();
+
+        return redirect('profile');
+    }
+    
+    public function changePassword(Request $request) {
+        return dd($request->all());
+    }
 }

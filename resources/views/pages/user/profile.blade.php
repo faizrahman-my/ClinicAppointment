@@ -61,13 +61,25 @@
 
                                     <div class="card-body p-4 p-md-5">
                                         <h4 class="fw-light mb-5">Change your profile detail</h4>
-                                        <form action="" method="">
+                                        <form action="{{ URL::to('profile') }}" method="post">
                                             @method('put')
                                             @csrf
+
+                                            <div class="form-floating mb-3 has-danger">
+                                                <input value="" type="text" name="name"
+                                                    class="form-control @error('name')is-invalid @enderror"
+                                                    placeholder="">
+                                                <label>Name</label>
+                                                <div class="invalid-feedback text-start"> @error('name')
+                                                        {{ $message }}
+                                                    @enderror
+                                                </div>
+                                            </div>
+
                                             <div class="form-floating mb-3 has-danger">
                                                 <input value="" type="text" name="username"
                                                     class="form-control @error('username')is-invalid @enderror"
-                                                    placeholder="jimmyneutron">
+                                                    placeholder="">
                                                 <label>Username</label>
                                                 <div class="invalid-feedback text-start"> @error('username')
                                                         {{ $message }}
@@ -114,7 +126,7 @@
 
                                     <div class="card-body p-4 p-md-5">
                                         <h4 class="fw-light mb-5">Update your password</h4>
-                                        <form action="" method="">
+                                        <form action="{{ URL::to('profile/password') }}" method="post">
                                             @method('put')
                                             @csrf
 

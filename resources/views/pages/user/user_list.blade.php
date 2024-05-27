@@ -26,7 +26,7 @@
 
                 <div class="col-6 d-flex justify-content-end">
                     <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        Add Doctor
+                        Add Staff
                     </button>
                 </div>
 
@@ -93,56 +93,76 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add Doctor</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add Staff</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="px-2">
-                        <form action="" method="">
+                        <form action="{{ URL::to('users') }}" method="post">
+                            @method('post')
                             @csrf
-                            <input type="hidden" name="event_id" value="" autocomplete="off">
 
                             <div class="form-floating mb-3 has-danger">
-                                <input value="" type="text" name="event_title" class="form-control is-invalid"
-                                    placeholder="Birthday Party">
+                                <input value="" type="text" name="name" class="form-control @error('name')is-invalid @enderror"
+                                    placeholder="">
                                 <label>Name</label>
-                                <div class="invalid-feedback text-start">test</div>
+                                <div class="invalid-feedback text-start">
+                                    @error('name')
+                                        {{ $message }}
+                                    @enderror
+                                </div>
                             </div>
 
                             <div class="form-floating mb-3 has-danger">
-                                <input value="" type="text" name="event_title" class="form-control is-invalid"
-                                    placeholder="Birthday Party">
+                                <input value="" type="text" name="username" class="form-control @error('username')is-invalid @enderror"
+                                    placeholder="">
                                 <label>Username</label>
-                                <div class="invalid-feedback text-start">test</div>
+                                <div class="invalid-feedback text-start">
+                                    @error('username')
+                                        {{ $message }}
+                                    @enderror
+                                </div>
                             </div>
 
                             <div class="form-floating mb-3 has-danger">
-                                <input value="" type="text" name="event_title" class="form-control is-invalid"
-                                    placeholder="Birthday Party">
+                                <input value="" type="text" name="email" class="form-control @error('email')is-invalid @enderror"
+                                    placeholder="">
                                 <label>Email</label>
-                                <div class="invalid-feedback text-start">test</div>
+                                <div class="invalid-feedback text-start">
+                                    @error('email')
+                                        {{ $message }}
+                                    @enderror
+                                </div>
                             </div>
 
                             <div class="form-floating mb-3 has-danger">
 
-                                <select name="" class="form-select form-control is-invalid">
-                                    <option>PJ</option>
-                                    <option>Shah Alam</option>
-                                    <option>KD</option>
+                                <select name="branch" class="form-select form-control @error('branch')is-invalid @enderror">
+                                    @foreach ($clinic_list as $clinic)
+                                        <option value="{{ $clinic->id }}">{{ $clinic->branch }}</option>
+                                    @endforeach
                                 </select>
                                 <label>Branch</label>
-                                <div class="invalid-feedback text-start">test</div>
+                                <div class="invalid-feedback text-start">
+                                    @error('branch')
+                                        {{ $message }}
+                                    @enderror
+                                </div>
 
                             </div>
 
                             <div class="form-floating mb-3 has-danger">
 
-                                <select name="" class="form-select form-control is-invalid">
-                                    <option>Admin</option>
-                                    <option>Doctor</option>
+                                <select name="role" class="form-select form-control @error('role')is-invalid @enderror">
+                                    <option value="0">Doctor</option>
+                                    <option value="1">Admin</option>
                                 </select>
                                 <label>Role</label>
-                                <div class="invalid-feedback text-start">test</div>
+                                <div class="invalid-feedback text-start">
+                                    @error('role')
+                                        {{ $message }}
+                                    @enderror
+                                </div>
 
                             </div>
 
