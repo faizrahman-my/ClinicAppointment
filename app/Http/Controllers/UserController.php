@@ -120,6 +120,21 @@ class UserController extends Controller
     }
     
     public function changePassword(Request $request) {
-        return dd($request->all());
+        $input = $request->validate([
+            'old_password' => 'required',
+            'new_password' => 'required|min:8',
+        ]);
+
+        $user = User::where('username', session('username'))->first();
+
+        if(Hash::check($input['old_password'], $user->password)) {
+            $user->password = Hash::make($input['new_password']);
+            $user->save();
+
+            return redirect('profile')->with('success', 'You have successfully changed your password');
+        }
+        else{
+            return redirect('profile')->with('error', 'You old password is incorrect');
+        }
     }
 }

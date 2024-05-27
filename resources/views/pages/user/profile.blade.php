@@ -29,7 +29,7 @@
         </div>
     </div>
     <div class="text-center">
-        <h5 class="fs-5 mb-0 fw-semibold">{{session()->has('name') ? session('name').session('a') : "unknown"}}</h5>
+        <h5 class="fs-5 mb-0 fw-semibold">{{session()->has('name') ? session('name') : "unknown"}}</h5>
         <p class="mb-0 fs-4">Designer</p>
     </div>
 
@@ -155,8 +155,11 @@
                                                         {{ $message }}
                                                     @enderror
                                                 </div>
+                                                @if (session()->has('success'))
+                                                    <p class="text-danger small">{{ session('success') }}</p>
+                                                @endif
                                             </div>
-                                            <div class="form-floating mb-3 has-danger">
+                                            {{-- <div class="form-floating mb-3 has-danger">
                                                 <input type="password" name="password_confirmation"
                                                     class="form-control @error('password_confirmation')is-invalid @enderror"
                                                     placeholder="Password">
@@ -166,7 +169,7 @@
                                                         {{ $message }}
                                                     @enderror
                                                 </div>
-                                            </div>
+                                            </div> --}}
 
 
                                             <button type="submit" class="btn btn-primary btn-block mb-4 w-100">

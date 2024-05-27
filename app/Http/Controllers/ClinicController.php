@@ -45,8 +45,8 @@ class ClinicController extends Controller
             ];
         }
 
-        $data['all_rating'] = $clinic_rate;
-        $data['recent_rating'] = $clinic_rate_new;
+        $data['all_rating'] = $clinic_rate ?? [];
+        $data['recent_rating'] = $clinic_rate_new ?? [];
         return view('pages.index', $data);
     }
 
