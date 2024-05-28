@@ -28,7 +28,7 @@ class UserController extends Controller
     public function logout()
     {
         session()->flush();
-        return redirect('');
+        return redirect('login');
     }
 
     public function redirectLoginUser(Request $request)
@@ -60,7 +60,7 @@ class UserController extends Controller
                 }
                 
 
-                return redirect('/appointment');
+                return redirect('/profile');
                 // return json_encode(session('sa'));
             } else {
                 return redirect('/login')->with('error', 'Your username or password is incorrect');

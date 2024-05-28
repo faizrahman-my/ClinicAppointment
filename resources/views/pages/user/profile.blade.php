@@ -4,17 +4,7 @@
 
 @section('account-active')active @endsection
 
-@section('link-home'){{ URL::to('/') }}@endsection
-@section('link-appointment'){{ URL::to('/appointment/reserve') }}@endsection
-@section('link-service'){{ URL::to('/service') }}@endsection
-@section('link-branch'){{ URL::to('/branch') }}@endsection
-@section('link-doctor'){{ URL::to('/doctor') }}@endsection
-@section('link-about'){{ URL::to('/about') }}@endsection
 
-@section('link-account'){{ URL::to('/profile') }}@endsection
-@section('link-manageuser'){{ URL::to('/users') }}@endsection
-@section('link-myappointment'){{ URL::to('/appointment') }}@endsection
-@section('link-login'){{ URL::to('/login') }}@endsection
 
 @section('content')
 
@@ -29,8 +19,13 @@
         </div>
     </div>
     <div class="text-center">
-        <h5 class="fs-5 mb-0 fw-semibold">{{session()->has('name') ? session('name') : "unknown"}}</h5>
-        <p class="mb-0 fs-4">Designer</p>
+        <h5 class="fs-5 mb-0 fw-semibold">{{ session()->has('name') ? ucwords(session('name')) : 'unknown' }}</h5>
+        @if (session()->has('a'))
+            <p class="mb-0 fs-4">{{ session('a') == 1 ? 'Admin' : 'Doctor' }}</p>
+        @else
+            <p class="mb-0 fs-4">{{ session('sa') == 1 ? 'Superadmin' : 'User' }}</p>
+        @endif
+
     </div>
 
 
@@ -67,8 +62,7 @@
 
                                             <div class="form-floating mb-3 has-danger">
                                                 <input value="" type="text" name="name"
-                                                    class="form-control @error('name')is-invalid @enderror"
-                                                    placeholder="">
+                                                    class="form-control @error('name')is-invalid @enderror" placeholder="">
                                                 <label>Name</label>
                                                 <div class="invalid-feedback text-start"> @error('name')
                                                         {{ $message }}
@@ -159,17 +153,6 @@
                                                     <p class="text-danger small">{{ session('success') }}</p>
                                                 @endif
                                             </div>
-                                            {{-- <div class="form-floating mb-3 has-danger">
-                                                <input type="password" name="password_confirmation"
-                                                    class="form-control @error('password_confirmation')is-invalid @enderror"
-                                                    placeholder="Password">
-                                                <label>Confirm Password</label>
-                                                <div class="invalid-feedback text-start">
-                                                    @error('password_confirmation')
-                                                        {{ $message }}
-                                                    @enderror
-                                                </div>
-                                            </div> --}}
 
 
                                             <button type="submit" class="btn btn-primary btn-block mb-4 w-100">

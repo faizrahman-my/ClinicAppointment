@@ -19,6 +19,6 @@ class AuthenticateClinicPatient
             return $next($request);
         }
 
-        return redirect('/');
+        return redirect('login');
     }
 }

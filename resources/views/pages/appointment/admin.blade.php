@@ -2,19 +2,9 @@
 
 @section('title', 'My Appointment | Klinik Azalea')
 
-@section('myappointment-active')active @endsection
+@section('staff-appointment-active')active @endsection
 
-@section('link-home'){{ URL::to('/') }}@endsection
-@section('link-appointment'){{ URL::to('/appointment/reserve') }}@endsection
-@section('link-service'){{ URL::to('/service') }}@endsection
-@section('link-branch'){{ URL::to('/branch') }}@endsection
-@section('link-doctor'){{ URL::to('/doctor') }}@endsection
-@section('link-about'){{ URL::to('/about') }}@endsection
 
-@section('link-account'){{ URL::to('/profile') }}@endsection
-@section('link-manageuser'){{ URL::to('/users') }}@endsection
-@section('link-myappointment'){{ URL::to('/appointment') }}@endsection
-@section('link-login'){{ URL::to('/login') }}@endsection
 
 @section('content')
 
@@ -23,7 +13,7 @@
         <h1 class="text-primary mt-5">All Appointments</h1>
 
 
-        <!-- Filter Function -->
+        {{-- <!-- Filter Function -->
         <form id="filter-form" class="mb-4">
             <div class="form-row d-flex">
                 <div class="form-group col-md-6">
@@ -45,7 +35,7 @@
                     </select>
                 </div>
             </div>
-        </form>
+        </form> --}}
 
         <!-- Sample Appointment 2 -->
         @foreach ($appointment_list as $appointment)

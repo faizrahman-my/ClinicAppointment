@@ -4,17 +4,7 @@
 
 @section('about-active')active @endsection
 
-@section('link-home'){{ URL::to('/') }}@endsection
-@section('link-appointment'){{ URL::to('/appointment/reserve') }}@endsection
-@section('link-service'){{ URL::to('/service') }}@endsection
-@section('link-branch'){{ URL::to('/branch') }}@endsection
-@section('link-doctor'){{ URL::to('/doctor') }}@endsection
-@section('link-about'){{ URL::to('/about') }}@endsection
 
-@section('link-account'){{ URL::to('/profile') }}@endsection
-@section('link-manageuser'){{ URL::to('/users') }}@endsection
-@section('link-myappointment'){{ URL::to('/appointment') }}@endsection
-@section('link-login'){{ URL::to('/login') }}@endsection
 
 @section('content')
     <section class="py-5 mb-md-5 mt-2 mx-3 bg-opacity-50" style="background-image: url('{{ asset('/assets/img/tah.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
