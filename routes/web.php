@@ -39,6 +39,7 @@ Route::post('logout', [UserController::class, 'logout']);
 Route::get('users', [AdminController::class, 'index']);
 Route::get('users/{id}', [AdminController::class, 'manageUser']);
 Route::post('users', [AdminController::class, 'createStaffAccount']);
+Route::post('branch', [AdminController::class, 'createClinicBranch']);
 
 
 Route::get('appointment', [AppointmentController::class, 'index'])->middleware('clinic.patient');

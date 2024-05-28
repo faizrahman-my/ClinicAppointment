@@ -8,6 +8,8 @@
     {{-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> --}}
     <title>@yield('title')</title>
     <link rel="stylesheet" href="{{ asset('/assets/css/bootstrap.min.css') }}">
+    
+    @yield('style')
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -27,7 +29,9 @@
         <!-- Copyright -->
     </footer>
 
+    @yield('script')
     <script src="{{ asset('/assets/js/bootstrap.bundle.min.js') }}"></script>
+    
 </body>
 
 </html>

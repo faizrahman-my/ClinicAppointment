@@ -25,13 +25,14 @@ class AppointmentController extends Controller
 
         foreach ($appointment as $apt) {
             $user_id = $staffLookup[$apt->staff_id]->user_id ?? null;
+            $approve_stat = $apt->status ?? $apt->reservation_status;
             $my_apt[] = [
                 'id' => base64_encode($apt->id),
                 'reason' => $apt->reservation_reason,
                 'clinic' => $clinicLookup[$apt->clinic_id]->branch,
                 'staff' => $userLookup[$user_id]->username ?? 'Not Assigned',
                 'date' => $apt->reservation_date,
-                'status' => $apt->reservation_status == 'approved' ? $apt->status : $apt->reservation_status,
+                'status' => $apt->reservation_status == 'approved' ? $approve_stat : $apt->reservation_status,
             ];
         }
         $data['appointment_list'] = $my_apt ?? [];

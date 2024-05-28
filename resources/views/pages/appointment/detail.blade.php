@@ -113,7 +113,7 @@
 
                                     @if ($rating)
                                         <div class="row">
-                                            <p class="col-6 d-flex justify-content-start">{{ nl2br($rating->feedback) }}
+                                            <p class="col-6 d-flex justify-content-start">{!! nl2br($rating->feedback) !!}
                                             </p>
                                             <div class="col-6 d-flex justify-content-end">
                                                 <form action="{{ URL::to('rating') }}/{{ $rating->id }}?id={{$id}}" method="post">
