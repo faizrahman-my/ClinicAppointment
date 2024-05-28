@@ -66,5 +66,9 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'clinic.user' => \App\Http\Middleware\AuthenticateClinicUser::class,
         'clinic.patient' => \App\Http\Middleware\AuthenticateClinicPatient::class,
+        'clinic.doctor' => \App\Http\Middleware\AuthenticateClinicDoctor::class,
+        'clinic.admin' => \App\Http\Middleware\AuthenticateClinicAdmin::class,
+        'clinic.superadmin' => \App\Http\Middleware\AuthenticateClinicSuperAdmin::class,
+        'clinic.web' => \App\Http\Middleware\AuthenticateClinicWeb::class,
     ];
 }

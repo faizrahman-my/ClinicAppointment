@@ -60,6 +60,17 @@
                     </div>
                 </div>
 
+                <br>
+                @if ($appointment['status'] == 'rejected')
+                    <div class="mb-2">
+                        <div class="fw-bold">Comment:</div>
+                        <br>
+                        <div class="">
+                            {!! nl2br($appointment['comment']) !!}
+                        </div>
+                    </div>
+                @endif
+
 
 
             </div>

@@ -27,19 +27,19 @@ Route::get('branch', [ClinicController::class, 'branch']);
 
 
 //db
-Route::get('login', [UserController::class, 'index']);
-Route::post('login', [UserController::class, 'redirectLoginUser']);
-Route::get('register', [UserController::class, 'register']);
-Route::post('register', [UserController::class, 'createNewAccount']);
+Route::get('login', [UserController::class, 'index'])->middleware('clinic.web');
+Route::post('login', [UserController::class, 'redirectLoginUser'])->middleware('clinic.web');
+Route::get('register', [UserController::class, 'register'])->middleware('clinic.web');
+Route::post('register', [UserController::class, 'createNewAccount'])->middleware('clinic.web');
 Route::get('profile', [UserController::class, 'profile'])->middleware('clinic.user');
 Route::put('profile', [UserController::class, 'updateProfile'])->middleware('clinic.user');
 Route::put('profile/password', [UserController::class, 'changePassword'])->middleware('clinic.user');
 Route::post('logout', [UserController::class, 'logout']);
 
-Route::get('users', [AdminController::class, 'index']);
-Route::get('users/{id}', [AdminController::class, 'manageUser']);
-Route::post('users', [AdminController::class, 'createStaffAccount']);
-Route::post('branch', [AdminController::class, 'createClinicBranch']);
+Route::get('users', [AdminController::class, 'index'])->middleware('clinic.superadmin');
+Route::get('users/{id}', [AdminController::class, 'manageUser'])->middleware('clinic.superadmin');
+Route::post('users', [AdminController::class, 'createStaffAccount'])->middleware('clinic.superadmin');
+Route::post('branch', [AdminController::class, 'createClinicBranch'])->middleware('clinic.superadmin');
 
 
 Route::get('appointment', [AppointmentController::class, 'index'])->middleware('clinic.patient');
@@ -48,11 +48,11 @@ Route::get('appointment/reserve', [AppointmentController::class, 'reserve'])->mi
 Route::post('appointment/reserve', [AppointmentController::class, 'setReservation'])->middleware('clinic.patient');
 Route::get('appointment/status/{id}', [AppointmentController::class, 'status'])->middleware('clinic.patient');
 Route::get('appointment/detail/{id}', [AppointmentController::class, 'detail'])->middleware('clinic.patient');
-Route::get('appointment/admin', [AppointmentController::class, 'approval']);
-Route::put('appointment/admin/approve/{id}', [AppointmentController::class, 'setApprove']);
-Route::put('appointment/admin/reject/{id}', [AppointmentController::class, 'setReject']);
-Route::get('appointment/doctor', [AppointmentController::class, 'manage']);
-Route::put('appointment/doctor/{id}', [AppointmentController::class, 'updateStatus']);
+Route::get('appointment/admin', [AppointmentController::class, 'approval'])->middleware('clinic.admin');
+Route::put('appointment/admin/approve/{id}', [AppointmentController::class, 'setApprove'])->middleware('clinic.admin');
+Route::put('appointment/admin/reject/{id}', [AppointmentController::class, 'setReject'])->middleware('clinic.admin');
+Route::get('appointment/doctor', [AppointmentController::class, 'manage'])->middleware('clinic.doctor');
+Route::put('appointment/doctor/{id}', [AppointmentController::class, 'updateStatus'])->middleware('clinic.doctor');
 
 Route::post('rating/{id}', [RatingController::class, 'create'])->middleware('clinic.patient');
 Route::delete('rating/{id}', [RatingController::class, 'destroy'])->middleware('clinic.patient');
