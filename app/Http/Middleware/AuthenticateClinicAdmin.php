@@ -15,7 +15,7 @@ class AuthenticateClinicAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (session()->has('a') && session('a') == "1") {
+        if (session()->has('a') && session('a') == "1" && session()->has('staff') && session('staff') == "1") {
             return $next($request);
         }
 

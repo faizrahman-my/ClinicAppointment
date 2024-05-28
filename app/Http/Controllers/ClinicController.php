@@ -15,7 +15,7 @@ class ClinicController extends Controller
     public function index()
     {
         $ratings = Rating::all();
-        $new_rating = Rating::orderBy('created_at', 'asc')->take(3)->get();
+        $new_rating = Rating::orderBy('created_at', 'asc')->take(5)->get();
         $user = User::all();
         $userLookup = $user->keyBy('id');
         $appointment = Appointment::all();

@@ -21,7 +21,7 @@
     <div class="text-center">
         <h5 class="fs-5 mb-0 fw-semibold">{{ session()->has('name') ? ucwords(session('name')) : 'unknown' }}</h5>
         @if (session()->has('a'))
-            <p class="mb-0 fs-4">{{ session('a') == 1 ? 'Admin' : 'Doctor' }}</p>
+            <p class="mb-0 fs-4">{{ session('a') == 1 ? 'Admin' : 'Doctor' }} ({{$clinic_name}})</p>
         @else
             <p class="mb-0 fs-4">{{ session('sa') == 1 ? 'Superadmin' : 'User' }}</p>
         @endif

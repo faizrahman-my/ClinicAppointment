@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Clinic;
 use App\Models\Staff;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -22,7 +23,10 @@ class UserController extends Controller
 
     public function profile()
     {
-        return view('pages.user.profile');
+        $clinic = Clinic::where('id', session('clinic'))->first();
+        $data['clinic_name'] = $clinic->branch ?? '';
+        
+        return view('pages.user.profile', $data);
     }
 
     public function logout()
