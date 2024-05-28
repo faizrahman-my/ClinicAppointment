@@ -210,6 +210,7 @@ class AppointmentController extends Controller
                 if ($apt->reservation_status == 'approved' && $apt->staff_id == $staffId->id) {
                     $my_apt[] = [
                         'id' => base64_encode($apt->id),
+                        'id_modal' => $apt->id,
                         'patient' => $userLookup[$apt->user_id]->name,
                         'reason' => $apt->reservation_reason,
                         'clinic' => $clinicLookup[$apt->clinic_id]->branch,

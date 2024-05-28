@@ -12,31 +12,6 @@
     <div class="container">
         <h1 class="text-primary mt-5">All Appointments</h1>
 
-
-        {{-- <!-- Filter Function -->
-        <form id="filter-form" class="mb-4">
-            <div class="form-row d-flex">
-                <div class="form-group col-md-6">
-                    <label for="branch-filter">Filter by Branch</label>
-                    <select class="form-control" id="branch-filter" name="branch">
-                        <option value="all">All Branches</option>
-                        <option value="main">Main Branch</option>
-                        <option value="downtown">Downtown Branch</option>
-                        <option value="eastside">Eastside Branch</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="status-filter">Filter by Status</label>
-                    <select class="form-control" id="status-filter" name="status">
-                        <option value="all">All Statuses</option>
-                        <option value="pending">Pending</option>
-                        <option value="approved">Approved</option>
-                        <option value="rejected">Rejected</option>
-                    </select>
-                </div>
-            </div>
-        </form> --}}
-
         <!-- Sample Appointment 2 -->
         @foreach ($appointment_list as $appointment)
             @if ($appointment['status'] == 'pending')

@@ -23,19 +23,19 @@
 
                     <!-- View Details Modal Button -->
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#appointmentDetailsModal1">
+                        data-bs-target="#appointmentDetailsModal{{ $appointment['id_modal'] }}">
                         View Details
                     </button>
                 </div>
             </div>
 
             <!-- Appointment Details Modal 1 -->
-            <div class="modal fade" id="appointmentDetailsModal1" tabindex="-1"
-                aria-labelledby="appointmentDetailsModalLabel1" aria-hidden="true">
+            <div class="modal fade" id="appointmentDetailsModal{{ $appointment['id_modal'] }}" tabindex="-1"
+                 aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="appointmentDetailsModalLabel1">Appointment Details -
+                            <h5 class="modal-title" >Appointment Details -
                                 {{ $appointment['patient'] }}</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
