@@ -24,7 +24,7 @@
     </section>
 
 
-    <section class="py-5">
+    <section class="py-5" style="background-color: rgb(220, 219, 219);">
         <div class="container">
             <div class="row justify-content-center text-center mb-3">
                 <div class="col-lg-8 col-xl-7">

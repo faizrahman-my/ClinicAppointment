@@ -12,7 +12,7 @@
     @yield('style')
 </head>
 
-<body class="d-flex flex-column min-vh-100">
+<body class="d-flex flex-column min-vh-100" style="background-color:#f5cac3 ">
 
     {{-- @include('components.navbar') --}}
 

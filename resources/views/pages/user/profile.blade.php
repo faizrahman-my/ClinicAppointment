@@ -14,7 +14,7 @@
         <div class="linear-gradient d-flex align-items-center justify-content-center rounded-circle">
             <div
                 class="border border-4 border-white d-flex align-items-center justify-content-center rounded-circle overflow-hidden">
-                <img src="{{ asset('/assets/img/toh.jpg') }}" alt="">
+                <img src="{{ asset('/assets/img/user.jpg') }}" alt="" width="150px" height="150px">
             </div>
         </div>
     </div>
