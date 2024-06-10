@@ -25,7 +25,7 @@
                                         <div class="form-floating mb-3">
                                             <input type="text" class="form-control @error('username')is-invalid @enderror" name="username"
                                                 placeholder="Email/Username">
-                                            <label for="floatingInput">Email/Username</label>
+                                            <label for="floatingInput">Username</label>
                                             <div class="invalid-feedback text-start">
                                                 @error('username')
                                                     {{ $message }}
