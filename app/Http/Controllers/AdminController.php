@@ -6,58 +6,16 @@ use App\Models\Clinic;
 use App\Models\Staff;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Yajra\DataTables\Facades\DataTables;
 
 class AdminController extends Controller
 {
     //
     public function index()
     {
-        if (session('sa') == 1) {
-            $staff = Staff::all();
-            $staffLookup = $staff->keyBy('user_id');
-            $user = User::all();
-            $userLookup = $user->keyBy('id');
-            $clinic = Clinic::all();
-            $clinicLookup = $clinic->keyBy('id');
-
-            foreach ($user as $u) {
-                // Check if user exists in staff lookup
-                if (isset($staffLookup[$u->id])) {
-                    $branch = $clinicLookup[$staffLookup[$u->id]->clinic_id]->branch;
-                    $role = $staffLookup[$u->id]->is_admin ? 'Admin' : 'Doctor';
-                    $staff_id = $staffLookup[$u->id]->id;
-                    $is_staff = $staffLookup[$u->id]->is_staff;
-                } else if ($u->is_superadmin == 1) {
-                    $branch = '-';
-                    $role = 'Superadmin';
-                    $staff_id = '-';
-                    $is_staff = '-';
-                } else {
-                    // If user doesn't have staff record, set branch and role to empty strings
-                    $branch = '-';
-                    $role = 'User';
-                    $staff_id = '-';
-                    $is_staff = '-';
-                }
-                if ($u->is_superadmin == 0) {
-                    $my_user[] = [
-                        'id' => $u->id,
-                        'name' => $u->name,
-                        'username' => $u->username,
-                        'email' => $u->email,
-                        'branch' => $branch,
-                        'role' => $role,
-                        'staff_id' => $staff_id,
-                        'staff_status' => $is_staff
-                    ];
-                }
-            }
-        }
-
-        $data['clinic_list'] = Clinic::all() ?? [];
-        $data['user_list'] = $my_user ?? [];
-
+        $data['clinic_list'] = Clinic::all();
         return view('pages.user.user_list', $data);
     }
 
@@ -82,12 +40,14 @@ class AdminController extends Controller
             $staff_enable->save();
 
             return redirect('users');
-        } else if ($request->query('menu') == 'remove') {
-            $staff_remove = User::where('id', $id)->first();
-            $staff_remove->delete();
+        }
+        // else if ($request->query('menu') == 'remove') {
+        //     $staff_remove = User::where('id', $id)->first();
+        //     $staff_remove->delete();
 
-            return redirect('users');
-        } else {
+        //     return redirect('users');
+        // }
+        else {
             return 'helo world';
         }
         // return view('pages.user.manage_user', ['id' => $id]);
@@ -123,5 +83,44 @@ class AdminController extends Controller
         $newClinic = Clinic::create($clinicData);
 
         return redirect('users');
+    }
+
+    public function userList()
+    {
+        $users = User::with(['staff.clinic'])
+            ->where('is_superadmin', 0)
+            ->select(['id', 'name', 'username', 'email', 'is_superadmin']);
+
+        return DataTables::eloquent($users)
+            ->addColumn('branch', function ($user) {
+                return $user->staff ? $user->staff->clinic->branch : '-';
+            })
+            ->addColumn('role', function ($user) {
+                if ($user->staff) {
+                    return $user->staff->is_admin ? 'Admin' : 'Doctor';
+                }
+                return 'User';
+            })
+            ->addColumn('option', function ($user) {
+                return [
+                    'user_id' => $user->id,
+                    'staff_id' => $user->staff ? $user->staff->id : null,
+                    'is_staff' => $user->staff ? $user->staff->is_staff : null
+                ];
+            })
+            // ->filterColumn('branch', function($query, $keyword) {
+            //     $query->whereHas('staff.clinic', fn($q) => $q->where('branch', 'like', "%{$keyword}%"));
+            // })
+            // ->filterColumn('role', function($query, $keyword) {
+            //     $keyword = strtolower($keyword);
+            //     if (str_contains($keyword, 'admin')) {
+            //         $query->whereHas('staff', fn($q) => $q->where('is_admin', 1));
+            //     } elseif (str_contains($keyword, 'doctor')) {
+            //         $query->whereHas('staff', fn($q) => $q->where('is_admin', 0));
+            //     } elseif (str_contains($keyword, 'user')) {
+            //         $query->doesntHave('staff');
+            //     }
+            // })
+            ->make(true);
     }
 }

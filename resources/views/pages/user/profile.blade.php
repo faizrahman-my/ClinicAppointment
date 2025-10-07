@@ -19,11 +19,11 @@
         </div>
     </div>
     <div class="text-center">
-        <h5 class="fs-5 mb-0 fw-semibold">{{ session()->has('name') ? ucwords(session('name')) : 'unknown' }}</h5>
-        @if (session()->has('a'))
-            <p class="mb-0 fs-4">{{ session('a') == 1 ? 'Admin' : 'Doctor' }} ({{$clinic_name}})</p>
+        <h5 class="fs-5 mb-0 fw-semibold">{{ Auth::user()->name ? ucwords(Auth::user()->name) : ucwords(Auth::user()->username) }}</h5>
+        @if (Auth::user()->staff)
+            <p class="mb-0 fs-4">{{ Auth::user()->staff->is_admin == 1 ? 'Admin' : 'Doctor' }} ({{$clinic_name}})</p>
         @else
-            <p class="mb-0 fs-4">{{ session('sa') == 1 ? 'Superadmin' : 'User' }}</p>
+            <p class="mb-0 fs-4">{{ Auth::user()->is_superadmin == 1 ? 'Superadmin' : 'User' }}</p>
         @endif
 
     </div>
@@ -61,7 +61,7 @@
                                             @csrf
 
                                             <div class="form-floating mb-3 has-danger">
-                                                <input value="" type="text" name="name"
+                                                <input value="{{Auth::user()->name}}" type="text" name="name"
                                                     class="form-control @error('name')is-invalid @enderror" placeholder="">
                                                 <label>Name</label>
                                                 <div class="invalid-feedback text-start"> @error('name')
@@ -71,7 +71,7 @@
                                             </div>
 
                                             <div class="form-floating mb-3 has-danger">
-                                                <input value="" type="text" name="username"
+                                                <input value="{{Auth::user()->username}}" type="text" name="username"
                                                     class="form-control @error('username')is-invalid @enderror"
                                                     placeholder="">
                                                 <label>Username</label>
@@ -81,7 +81,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-floating mb-3 has-danger">
-                                                <input value="" type="email" name="email"
+                                                <input value="{{Auth::user()->email}}" type="email" name="email"
                                                     class="form-control @error('email')is-invalid @enderror"
                                                     placeholder="name@example.com">
                                                 <label>Email</label>

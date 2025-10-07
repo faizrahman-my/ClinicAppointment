@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthenticateClinicAdmin
@@ -15,7 +16,7 @@ class AuthenticateClinicAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (session()->has('a') && session('a') == "1" && session()->has('staff') && session('staff') == "1") {
+        if (Auth::check() && Auth::user()->staff && Auth::user()->staff->is_admin == 1 && Auth::user()->staff->is_staff == 1) {
             return $next($request);
         }
 

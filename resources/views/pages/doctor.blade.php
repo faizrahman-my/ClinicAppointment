@@ -56,8 +56,8 @@
 
             <div class="row justify-content-center">
                 @foreach ($doctor_list as $doctor)
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card text-center border-0 mb-3 border-dark border-opacity-10 rounded-4 shadow-sm">
+                    <div class="col-md-6 col-lg-3 d-flex">
+                        <div class="card text-center border-0 mb-3 border-dark border-opacity-10 rounded-4 shadow-sm w-100">
                             <div class="card-body">
                                 <div class="mb-4">
                                     <img class="img-fluid rounded-circle" src="{{ asset('/assets/img/') }}/{{ $doctor['image'] }}" style="width: 150px; height: 150px; object-fit: cover;">

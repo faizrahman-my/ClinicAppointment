@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthenticateClinicWeb
@@ -15,8 +16,7 @@ class AuthenticateClinicWeb
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!$request->session()->has('username')) {
-            // Redirect or respond with an error if the session key is not present
+        if (!Auth::check()) {
             return $next($request);
         }
 

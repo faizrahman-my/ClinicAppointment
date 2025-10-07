@@ -18,6 +18,12 @@
 
                                     <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
 
+                                    @if (session()->has('error'))
+                                        <div class="alert alert-danger mx-1 mx-md-4" role="alert">
+                                            {{ session('error') }}
+                                        </div>
+                                    @endif
+
                                     <form class="mx-1 mx-md-4" action="{{ URL::to('register') }}" method="POST">
                                         @method('post')
                                         @csrf

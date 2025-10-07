@@ -7,17 +7,28 @@ use App\Models\Clinic;
 use App\Models\Rating;
 use App\Models\Staff;
 use App\Models\User;
+use App\Services\GoogleService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AppointmentController extends Controller
 {
     //
+
+    protected $googleService;
+
+    public function __construct(GoogleService $googleService)
+    {
+        $this->googleService = $googleService;
+    }
+
     public function index()
     {
         $user = User::all();
         $userLookup = $user->keyBy('id');
         $userLookupUname = $user->keyBy('username');
-        $appointment = Appointment::where('user_id', $userLookupUname[session('username')]->id)->get();
+        $appointment = Appointment::where('user_id', Auth::id())->get();
         $clinic = Clinic::all();
         $staff = Staff::all();
         $clinicLookup = $clinic->keyBy('id');
@@ -110,9 +121,7 @@ class AppointmentController extends Controller
         ];
 
         //get rating count row
-        $userLookupUname = $user->keyBy('username');
-        $user_id = $userLookupUname[session('username')]->id;
-        $data['rating'] = Rating::where('user_id', $user_id)->where('appointment_id', base64_decode($id))->first();
+        $data['rating'] = Rating::where('user_id', Auth::id())->where('appointment_id', base64_decode($id))->first();
 
         $data['appointment'] = $my_apt ?? [];
         $data['id'] = $id;
@@ -122,7 +131,7 @@ class AppointmentController extends Controller
 
     public function approval()
     {
-        $appointment = Appointment::where('clinic_id', session('clinic'))->get();
+        $appointment = Appointment::where('clinic_id', Auth::user()->staff->clinic_id)->get();
         $clinic = Clinic::all();
         $user = User::all();
         $staff = Staff::all();
@@ -148,7 +157,7 @@ class AppointmentController extends Controller
             ];
         }
         foreach ($staff as $staffs) {
-            if ($staffs->clinic_id == session('clinic') && $staffs->is_staff == 1 && $staffs->is_admin == 0) {
+            if ($staffs->clinic_id == Auth::user()->staff->clinic_id && $staffs->is_staff == 1 && $staffs->is_admin == 0) {
                 $my_staff[] = [
                     'id' => $staffs->id,
                     'name' => $userLookup[$staffs->user_id]->name
@@ -176,6 +185,18 @@ class AppointmentController extends Controller
         $appointment->appointment_time = $input['appointment_hour'];
         $appointment->save();
 
+        $user = User::where('id', $appointment->user_id)->first();
+        $branchName = Clinic::where('id', $appointment->clinic_id)->first();
+        $adminName = User::where('id', Auth::id())->first();
+
+        $sheetValue = ['Appointment for ' . $user->name . ' on ' . Carbon::parse($appointment->reservation_date)->format('d/m/Y') . ' is approved ( ' . $appointment->reservation_reason . ' ) by ' . $adminName->name, (string)date('d/m/Y H:i:s')];
+        $this->googleService->insertSheetValueSeparateTab(
+            $branchName->branch,
+            '!B4:C',
+            $sheetValue,
+            'History Template'
+        );
+
         return redirect('/appointment/admin');
     }
 
@@ -189,21 +210,32 @@ class AppointmentController extends Controller
         $appointment->doctor_comment = $input['feedback'];
         $appointment->save();
 
+        $user = User::where('id', $appointment->user_id)->first();
+        $branchName = Clinic::where('id', $appointment->clinic_id)->first();
+        $adminName = User::where('id', Auth::id())->first();
+
+        $sheetValue = ['Appointment for ' . $user->name . ' on ' . Carbon::parse($appointment->reservation_date)->format('d/m/Y') . ' is rejected ( ' . $appointment->reservation_reason . ' ) by ' . $adminName->name, (string)date('d/m/Y H:i:s')];
+        $this->googleService->insertSheetValueSeparateTab(
+            $branchName->branch,
+            '!B4:C',
+            $sheetValue,
+            'History Template'
+        );
+
         return redirect('/appointment/admin');
     }
 
     public function manage()
     {
-        $appointment = Appointment::where('clinic_id', session('clinic'))->get();
+        $appointment = Appointment::where('clinic_id', Auth::user()->staff->clinic_id)->get();
         $clinic = Clinic::all();
         $user = User::all();
         $staff = Staff::all();
         $clinicLookup = $clinic->keyBy('id');
         $userLookup = $user->keyBy('id');
         $staffLookup = $staff->keyBy('id');
-        $userId = User::where('username', session('username'))->first();
-        if ($userId) {
-            $staffId = Staff::where('user_id', $userId->id)->first();
+        $staffId = Auth::user()->staff;
+        if ($staffId) {
 
             foreach ($appointment as $apt) {
                 $user_id = $staffLookup[$apt->staff_id]->user_id ?? null;
@@ -248,6 +280,19 @@ class AppointmentController extends Controller
         }
 
         $appointment->save();
+
+        //update by doctor
+        $user = User::where('id', $appointment->user_id)->first();
+        $branchName = Clinic::where('id', $appointment->clinic_id)->first();
+        $doctorName = User::where('id', Auth::id())->first();
+        $sheetValue = ['Appointment for ' . $user->name . ' on ' . Carbon::parse($appointment->reservation_date)->format('d/m/Y') . ' is updated to ' . $appointment->status . ' by Dr. ' . $doctorName->name, (string)date('d/m/Y H:i:s')];
+        $this->googleService->insertSheetValueSeparateTab(
+            $branchName->branch,
+            '!B4:C',
+            $sheetValue,
+            'History Template'
+        );
+
         return redirect('appointment/doctor');
     }
 
@@ -255,7 +300,7 @@ class AppointmentController extends Controller
     {
         $input = $request->validate([
             'username' => 'required',
-            'appointment_date' => 'required',
+            'appointment_date' => 'required|after_or_equal:today',
             'appointment_time' => 'required',
             'service_type' => 'required',
             'clinic_branch' => 'required'
@@ -263,6 +308,16 @@ class AppointmentController extends Controller
         $user = User::where('username', $input['username'])->first();
         $appointmentData = ['reservation_reason' => $input['service_type'], 'reservation_date' => $input['appointment_date'], 'reservation_time' => $input['appointment_time'], 'reservation_status' => 'pending', 'user_id' => $user->id, 'clinic_id' => $input['clinic_branch']];
         $appointment = Appointment::create($appointmentData);
+        $branchName = Clinic::where('id', $input['clinic_branch'])->first();
+
+        $sheetValue = ['Appointment for ' . $user->name . ' on ' . Carbon::parse($appointment->reservation_date)->format('d/m/Y') . ' is pending for approval ( ' . $appointment->reservation_reason . ' )', (string)date('d/m/Y H:i:s')];
+        $this->googleService->insertSheetValueSeparateTab(
+            $branchName->branch,
+            '!B4:C',
+            $sheetValue,
+            'History Template'
+        );
+
 
         return redirect('/appointment');
     }

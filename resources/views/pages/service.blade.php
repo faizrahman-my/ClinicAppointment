@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <section class="py-5 mb-md-5 mt-2 mx-3 bg-opacity-50"
+    <section class="py-5 mb-5 mt-2 mx-3 bg-opacity-50"
         style="background-image: url('{{ asset('/assets/img/tah.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
         <div class="container">
             <div class="row text-white py-4">
@@ -26,15 +26,19 @@
                     <div class="col-md-12 text-center">
                         <h2 class="mb-3"><span> OUR SERVICES</span></h2>
                         <p class="mb-5">
-                            At Clinic Azalea, we offer a comprehensive range of healthcare services designed to meet the diverse needs of our patients. With a team of skilled medical professionals and state-of-the-art facilities, we are committed to providing exceptional care and promoting overall well-being. Explore our services below
+                            At Clinic Azalea, we offer a comprehensive range of healthcare services designed to meet the
+                            diverse needs of our patients. With a team of skilled medical professionals and state-of-the-art
+                            facilities, we are committed to providing exceptional care and promoting overall well-being.
+                            Explore our services below
                         </p>
                     </div>
                 </div>
             </div>
 
 
-            <div class="row justiy-content-center">
-                <div class="card p-4 col-md-4">
+            <div class="row justify-content-center">
+
+                <div class="card mb-3 mx-2 p-4 col-md-3">
                     <div class="icon"> <i class="fa fa-desktop"></i> </div>
 
                     <div class="icon-content">
@@ -45,7 +49,7 @@
                     </div>
                 </div>
 
-                <div class="card p-4 col-md-4">
+                <div class="card mb-3 mx-2 p-4 col-md-3">
                     <div class="icon"> <i class="fa fa-code"></i> </div>
 
                     <div class="icon-content">
@@ -57,7 +61,7 @@
                     </div>
                 </div>
 
-                <div class="card p-4 col-md-4">
+                <div class="card mb-3 mx-2 p-4 col-md-3">
                     <div class="icon"> <i class="fa fa-paper-plane"></i> </div>
 
                     <div class="icon-content">
@@ -68,8 +72,8 @@
                         </p>
                     </div>
                 </div>
-                
-                <div class="card p-4 col-md-4">
+
+                <div class="card mb-3 mx-2 p-4 col-md-3">
                     <div class="icon"> <i class="fa fa-desktop"></i> </div>
 
                     <div class="icon-content">
@@ -80,8 +84,8 @@
                         </p>
                     </div>
                 </div>
-                
-                <div class="card p-4 col-md-4">
+
+                <div class="card mb-3 mx-2 p-4 col-md-3">
                     <div class="icon"> <i class="fa fa-code"></i> </div>
 
                     <div class="icon-content">
@@ -93,7 +97,7 @@
                     </div>
                 </div>
 
-                <div class="card p-4 col-md-4">
+                <div class="card mb-3 mx-2 p-4 col-md-3">
                     <div class="icon"> <i class="fa fa-paper-plane"></i> </div>
 
                     <div class="icon-content">
@@ -104,7 +108,7 @@
                     </div>
                 </div>
 
-                <div class="card p-4 col-md-4">
+                <div class="card mb-3 mx-2 p-4 col-md-3">
                     <div class="icon"> <i class="fa fa-desktop"></i> </div>
 
                     <div class="icon-content">
@@ -116,7 +120,7 @@
                     </div>
                 </div>
 
-                <div class="card p-4 col-md-4">
+                <div class="card mb-3 mx-2 p-4 col-md-3">
                     <div class="icon"> <i class="fa fa-code"></i> </div>
 
                     <div class="icon-content">
@@ -127,8 +131,8 @@
                         </p>
                     </div>
                 </div>
-                
-                <div class="card p-4 col-md-4">
+
+                <div class="card mb-3 mx-2 p-4 col-md-3">
                     <div class="icon"> <i class="fa fa-paper-plane"></i> </div>
 
                     <div class="icon-content">
@@ -139,6 +143,8 @@
                         </p>
                     </div>
                 </div>
+
+
 
             </div>
         </div>

@@ -7,7 +7,8 @@
 
 
 @section('content')
-    <section class="py-5 mb-md-5 mt-2 mx-3 bg-opacity-50" style="background-image: url('{{ asset('/assets/img/tah.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+    <section class="py-5 mb-md-5 mt-2 mx-3 bg-opacity-50"
+        style="background-image: url('{{ asset('/assets/img/tah.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
         <div class="container">
             <div class="row text-white py-4">
                 <div class="col-lg-8">
@@ -74,85 +75,214 @@
         </div>
     </section> --}}
 
-    <div class="text-center p-5 rounded-4 container mb-3" style="background-color: rgb(245, 185, 185);">
-        <h1>Our <span class="fw-bold">Story</span></h1>
-        <p><span class="text-white">Klinik Azalea</span> is your preferred choice because:</p>
-        <div class="row">
-            <span class="col-2"></span>
-            <p class="col-8">
-
-                Our clinic is renowned for its exceptional team of medical consultants who bring a wealth of knowledge and experience in their respective fields. Each consultant is meticulously selected not only for their professional expertise but also for their dedication to providing personalized care.
-                
-                Supported by a diverse team of specialized medical professionals, Clinic Azalea is committed to delivering comprehensive healthcare services. Our multidisciplinary approach ensures that every patient receives holistic and tailored treatment, addressing their unique needs with the utmost precision and care.
-                
-                At Clinic Azalea, we pride ourselves on fostering a welcoming and supportive environment. Our state-of-the-art facilities are designed to enhance the patient experience, ensuring comfort and convenience during every visit. We continuously invest in the latest medical technologies and advancements to offer the highest standard of care.
-                
-                Our mission is to promote health and wellness in our community through compassionate, patient-centered care. Whether you need routine check-ups, specialized treatments, or expert advice, Clinic Azalea is here to support you on your journey to optimal health. Trust us to be your partner in health, providing exceptional care with a personal touch.</p>
-            <span class="col-2"></span>
-        </div>
-        
-    </div>
-
-    <div class="text-center container bg-secondary rounded-4 p-5 mb-3">
-        <h2 class="fw-bolder fs-3">Why Choose Us</h2>
-        <ul class="list-group list-group-flush mb-3">
-            <li class="list-group-item">&#x2022; Expert Team: Highly qualified and experienced medical professionals.</li>
-            <li class="list-group-item">&#x2022; Personalized Care: Tailored treatment plans for each patient.</li>
-            <li class="list-group-item">&#x2022; Modern Facilities: Advanced technology and comfortable amenities.</li>
-            <li class="list-group-item">&#x2022; Comprehensive Services: A wide range of healthcare services in one place.</li>
-          </ul>
-          <div class="row gap-3 justify-content-center">
-            <div class="col-auto">
-                <img src="data:image/jpeg;base64,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" alt="" class="img-thumbnail img-fluid" style="height: 300px; width: 300px; object-fit: cover;">
+    <div class="container mb-5">
+        <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+            <div class="card-header bg-primary text-white text-center py-4">
+                <h1 class="display-6 mb-0">Our <span class="fw-bold">Story</span></h1>
             </div>
-            <div class="col-auto">
-                <img src="https://res.cloudinary.com/dycihkdzs/image/upload/c_fill,f_auto/cloud/download/simak-cara-booking-konsultasi-dokter-prodia-terdekat-di-aplikasi-u-by-prodia-17052023-065529.jpg" alt="" class="img-thumbnail img-fluid" style="height: 300px; width: 300px; object-fit: cover;">
-            </div>
-            <div class="col-auto">
-                <img src="data:image/jpeg;base64,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" alt="" class="img-thumbnail img-fluid" style="height: 300px; width: 300px; object-fit: cover;">
-            </div>
-        </div>
-        
-    </div>
-
-    <div class="text-center container bg-secondary rounded-4 p-5 mb-3">
-        <div class="row g-5 justify-content-center">
-            <div class="col-lg-3 col-sm-6 text-center">
-                <div class="text-muted">
-                    <img src="https://cliniccleo.com/wp-content/uploads/2020/07/illustr-smile-onsub2tqqwuyfcfd2nhwojy0bvpmtv4idp1d6ylx48.png" alt="" height="100px" width="100px" class="img-fluid">
+            <div class="card-body p-5" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
+                <div class="text-center mb-4">
+                    <p class="lead text-primary fw-semibold mb-0">Klinik Azalea is your preferred choice because:</p>
                 </div>
-                <h5 class="mt-3">Safe and Proven Methods</h5>
-            </div>
-            <div class="col-lg-3 col-sm-6 text-center">
-                <div class="text-muted">
-                    <img src="https://cliniccleo.com/wp-content/uploads/2020/07/illustr-plus-onsu86hnoaw4mmmwzwebhs9ue3zw3gmazcmgx8wmaw.png">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="h-100 p-4 bg-white rounded-3 shadow-sm">
+                                    <h5 class="text-primary mb-3">Expert Medical Team</h5>
+                                    <p class="text-muted">Our clinic is renowned for its exceptional team of medical consultants who bring a wealth of knowledge and experience in their respective fields. Each consultant is meticulously selected for their professional expertise and dedication to personalized care.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="h-100 p-4 bg-white rounded-3 shadow-sm">
+                                    <h5 class="text-primary mb-3">Comprehensive Care</h5>
+                                    <p class="text-muted">Supported by a diverse team of specialized medical professionals, we deliver comprehensive healthcare services. Our multidisciplinary approach ensures holistic and tailored treatment for every patient's unique needs.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="h-100 p-4 bg-white rounded-3 shadow-sm">
+                                    <h5 class="text-primary mb-3">Modern Facilities</h5>
+                                    <p class="text-muted">We foster a welcoming environment with state-of-the-art facilities designed for patient comfort. We continuously invest in the latest medical technologies to offer the highest standard of care.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="h-100 p-4 bg-white rounded-3 shadow-sm">
+                                    <h5 class="text-primary mb-3">Patient-Centered Mission</h5>
+                                    <p class="text-muted">Our mission is promoting health and wellness through compassionate, patient-centered care. Trust us as your partner in health, providing exceptional care with a personal touch.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <h5 class="mt-3">Certified Doctors</h5>
-            </div>
-            <div class="col-lg-3 col-sm-6 text-center">
-                <div class="text-muted">
-                    <img src="https://cliniccleo.com/wp-content/uploads/2020/07/illustr-time-onsub8grvx2od0765pxo3iirw6xu41qwegya2mdk2w.png">
-                </div>
-                <h5 class="mt-3">Minimal downtime</h5>
-            </div>
-            <div class="col-lg-3 col-sm-6 text-center">
-                <div class="text-muted">
-                    <img src="https://cliniccleo.com/wp-content/uploads/2020/07/illustr-protect-onsube3t0xaeanyz8sdfih3jgi61e8daf8v6ya571k.png" alt="" height="100px" width="100px" class="img-fluid">
-                </div>
-                <h5 class="mt-3">FDA Approve</h5>
             </div>
         </div>
     </div>
-    
-    <div class="text-center p-5 rounded-4 container mb-3" style="background-color: rgb(255, 221, 221);">
-        <h2 class="fw- fs-4">For more Information Please Contact Us At +019-668 3294</h2>
-            
+
+    <div class="container mb-5">
+        <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+            <div class="card-header bg-gradient text-white text-center py-4" style="background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);">
+                <h2 class="display-6 mb-0 fw-bold">Why Choose Us</h2>
+            </div>
+            <div class="card-body p-5" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
+                <div class="row g-4 mb-5">
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-start p-4 bg-white rounded-3 shadow-sm h-100">
+                            <div class="flex-shrink-0 me-3">
+                                <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                    <i class="fas fa-user-md text-white"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h5 class="text-primary mb-2">Expert Team</h5>
+                                <p class="text-muted mb-0">Highly qualified and experienced medical professionals.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-start p-4 bg-white rounded-3 shadow-sm h-100">
+                            <div class="flex-shrink-0 me-3">
+                                <div class="bg-success rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                    <i class="fas fa-heart text-white"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h5 class="text-success mb-2">Personalized Care</h5>
+                                <p class="text-muted mb-0">Tailored treatment plans for each patient.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-start p-4 bg-white rounded-3 shadow-sm h-100">
+                            <div class="flex-shrink-0 me-3">
+                                <div class="bg-info rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                    <i class="fas fa-hospital text-white"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h5 class="text-info mb-2">Modern Facilities</h5>
+                                <p class="text-muted mb-0">Advanced technology and comfortable amenities.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-start p-4 bg-white rounded-3 shadow-sm h-100">
+                            <div class="flex-shrink-0 me-3">
+                                <div class="bg-warning rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                                    <i class="fas fa-clipboard-list text-white"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h5 class="text-warning mb-2">Comprehensive Services</h5>
+                                <p class="text-muted mb-0">A wide range of healthcare services in one place.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-3 justify-content-center">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="position-relative overflow-hidden rounded-3 shadow">
+                            <img src="{{ asset('assets/img/doc.jpeg') }}"
+                                alt="Medical Professional" class="img-fluid w-100" style="height: 250px; object-fit: cover;">
+                            <div class="position-absolute bottom-0 start-0 end-0 bg-dark bg-opacity-75 text-white p-3">
+                                <h6 class="mb-0">Expert Medical Team</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="position-relative overflow-hidden rounded-3 shadow">
+                            <img src="https://res.cloudinary.com/dycihkdzs/image/upload/c_fill,f_auto/cloud/download/simak-cara-booking-konsultasi-dokter-prodia-terdekat-di-aplikasi-u-by-prodia-17052023-065529.jpg"
+                                alt="Patient Consultation" class="img-fluid w-100" style="height: 250px; object-fit: cover;">
+                            <div class="position-absolute bottom-0 start-0 end-0 bg-dark bg-opacity-75 text-white p-3">
+                                <h6 class="mb-0">Patient Consultation</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="position-relative overflow-hidden rounded-3 shadow">
+                            <img src="{{ asset('assets/img/surgery.jpeg') }}"
+                                alt="Modern Surgery" class="img-fluid w-100" style="height: 250px; object-fit: cover;">
+                            <div class="position-absolute bottom-0 start-0 end-0 bg-dark bg-opacity-75 text-white p-3">
+                                <h6 class="mb-0">Advanced Procedures</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    
+    </div>
+
+    <div class="container mb-5">
+        <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+            <div class="card-body p-5" style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);">
+                <div class="text-center mb-5">
+                    <h2 class="display-6 fw-bold text-primary mb-3">Our Commitment</h2>
+                    <p class="lead text-muted">Excellence in healthcare through proven standards</p>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="text-center p-4 bg-white rounded-3 shadow-sm h-100 hover-lift">
+                            <div class="mb-3">
+                                <img src="https://cliniccleo.com/wp-content/uploads/2020/07/illustr-smile-onsub2tqqwuyfcfd2nhwojy0bvpmtv4idp1d6ylx48.png"
+                                    alt="Safe Methods" class="img-fluid" style="height: 80px; width: 80px; object-fit: contain;">
+                            </div>
+                            <h5 class="text-primary mb-2">Safe and Proven Methods</h5>
+                            <p class="text-muted small mb-0">Evidence-based treatments with proven safety records</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="text-center p-4 bg-white rounded-3 shadow-sm h-100 hover-lift">
+                            <div class="mb-3">
+                                <img src="https://cliniccleo.com/wp-content/uploads/2020/07/illustr-plus-onsu86hnoaw4mmmwzwebhs9ue3zw3gmazcmgx8wmaw.png"
+                                    alt="Certified Doctors" class="img-fluid" style="height: 80px; width: 80px; object-fit: contain;">
+                            </div>
+                            <h5 class="text-success mb-2">Certified Doctors</h5>
+                            <p class="text-muted small mb-0">Board-certified professionals with extensive experience</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="text-center p-4 bg-white rounded-3 shadow-sm h-100 hover-lift">
+                            <div class="mb-3">
+                                <img src="https://cliniccleo.com/wp-content/uploads/2020/07/illustr-time-onsub8grvx2od0765pxo3iirw6xu41qwegya2mdk2w.png"
+                                    alt="Minimal Downtime" class="img-fluid" style="height: 80px; width: 80px; object-fit: contain;">
+                            </div>
+                            <h5 class="text-info mb-2">Minimal Downtime</h5>
+                            <p class="text-muted small mb-0">Quick recovery with minimal disruption to your life</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="text-center p-4 bg-white rounded-3 shadow-sm h-100 hover-lift">
+                            <div class="mb-3">
+                                <img src="https://cliniccleo.com/wp-content/uploads/2020/07/illustr-protect-onsube3t0xaeanyz8sdfih3jgi61e8daf8v6ya571k.png"
+                                    alt="FDA Approved" class="img-fluid" style="height: 80px; width: 80px; object-fit: contain;">
+                            </div>
+                            <h5 class="text-warning mb-2">FDA Approved</h5>
+                            <p class="text-muted small mb-0">All treatments meet strict regulatory standards</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mb-5">
+        <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+            <div class="card-body text-center p-5" style="background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);">
+                <div class="mb-3">
+                    <i class="fas fa-phone-alt text-primary" style="font-size: 2rem;"></i>
+                </div>
+                <h3 class="text-primary mb-3">Need More Information?</h3>
+                <p class="lead text-muted mb-4">Our friendly staff is ready to assist you</p>
+                <a href="tel:+019-668-3294" class="btn btn-primary btn-lg rounded-pill px-5 py-3">
+                    <i class="fas fa-phone me-2"></i>Call Us: +019-668 3294
+                </a>
+            </div>
+        </div>
+    </div>
 
 
 
 
 
-        
+
+
 @endsection
