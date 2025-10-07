@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthenticateClinicSuperadmin
@@ -15,7 +16,7 @@ class AuthenticateClinicSuperadmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (session('sa') == "1" && session()->has('sa')) {
+        if (Auth::check() && Auth::user()->is_superadmin == 1) {
             return $next($request);
         }
 

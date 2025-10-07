@@ -14,9 +14,9 @@
                     <h2 class="display-5 fw-bold">Make Your Appointment Today</h2>
                     <p class="lead">Effortlessly manage all your appointment.</p>
                     <div class="d-grid col-3 mx-auto">
-                        @if (!session()->has('username'))
+                        @guest
                             <a class="btn btn-secondary" href="/register">Sign up</a>
-                        @endif
+                        @endguest
                     </div>
                 </div>
             </div>
@@ -24,7 +24,7 @@
     </section>
 
 
-    <section class="py-5">
+    <section class="py-5" style="background-color: rgb(220, 219, 219);">
         <div class="container">
             <div class="row justify-content-center text-center mb-3">
                 <div class="col-lg-8 col-xl-7">

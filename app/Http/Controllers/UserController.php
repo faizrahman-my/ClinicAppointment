@@ -6,7 +6,9 @@ use App\Models\Clinic;
 use App\Models\Staff;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Socialite\Facades\Socialite;
 
 class UserController extends Controller
 {
@@ -23,7 +25,9 @@ class UserController extends Controller
 
     public function profile()
     {
-        $clinic = Clinic::where('id', session('clinic'))->first();
+        $user = Auth::user();
+        $staff = $user->staff;
+        $clinic = $staff ? Clinic::find($staff->clinic_id) : null;
         $data['clinic_name'] = $clinic->branch ?? '';
         
         return view('pages.user.profile', $data);
@@ -31,95 +35,60 @@ class UserController extends Controller
 
     public function logout()
     {
-        session()->flush();
+        Auth::logout();
         return redirect('login');
     }
 
     public function redirectLoginUser(Request $request)
     {
-        $input = $request->validate([
+        $credentials = $request->validate([
             'username' => 'required',
             'password' => 'required'
         ]);
 
-        $user = User::where('username', $input['username'])->first();
-
-        $plain_pwd = $input['password'];
-        if ($user) {
-            $hashed_pwd = $user->password;
-            if (Hash::check($plain_pwd, $hashed_pwd)) {
-                $staff = Staff::where('user_id', $user->id)->first();
-                session()->put([
-                    'name' => $user->name ?? 'user-' . $user->username,
-                    'username' => $user->username,
-                    'email' => $user->email,
-                    'sa' => $user->is_superadmin
-                ]);
-                if($staff){
-                    session()->put([
-                        'a' => $staff->is_admin,
-                        'staff' => $staff->is_staff,
-                        'clinic' => $staff->clinic_id
-                    ]);
-                }
-                
-
-                return redirect('/profile');
-                // return json_encode(session('sa'));
-            } else {
-                return redirect('/login')->with('error', 'Your username or password is incorrect');
-            }
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect('/profile');
         }
-        else{
-            return redirect('/login')->with('error', 'Your username or password is incorrect');
-        }
+
+        return redirect('/login')->with('error', 'Your username or password is incorrect');
     }
 
     public function createNewAccount(Request $request)
     {
-
         $input = $request->validate([
             'username' => 'required|min:4|max:20|unique:users,username|alpha_dash',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8'
         ]);
-        $userDataArray = ['name' => $request->input('name'), 'username' => $input['username'], 'password' => $input['password'], 'email' => $input['email'], 'is_superadmin' => 0];
+        
+        $userDataArray = [
+            'name' => $request->input('name'), 
+            'username' => $input['username'], 
+            'password' => $input['password'], 
+            'email' => $input['email'], 
+            'is_superadmin' => 0
+        ];
         $newUser = User::create($userDataArray);
 
-        session()->put([
-            'name' => $newUser->name ?? 'user-' . $newUser->username,
-            'username' => $newUser->username,
-            'email' => $newUser->email,
-            'sa' => $newUser->is_superadmin
-        ]);
-
+        Auth::login($newUser);
         return redirect('/appointment');
     }
 
     public function updateProfile(Request $request)
     {
-
+        $user = Auth::user();
         $input = $request->validate([
             'name' => 'nullable',
-            'username' => 'nullable|min:4|max:20|unique:users,username|alpha_dash',
-            'email' => 'nullable|email|unique:users,email',
+            'username' => 'nullable|min:4|max:20|unique:users,username,' . $user->id . '|alpha_dash',
+            'email' => 'nullable|email|unique:users,email,' . $user->id,
         ]);
-        $user = User::where('username', session('username'))->first();
-        if($input['name']){
-            $user->name = $input['name'];
-            $request->session()->put('name', $input['name']);
-        }
-        if($input['username']){
-            $user->username = $input['username'];
-            $request->session()->put('username', $input['username']);
-        }
-        if($input['email']){
-            $user->email = $input['email'];
-            $request->session()->put('email', $input['email']);
-        }
+        
+        if($input['name']) $user->name = $input['name'];
+        if($input['username']) $user->username = $input['username'];
+        if($input['email']) $user->email = $input['email'];
 
         $user->save();
-
         return redirect('profile');
     }
     
@@ -129,16 +98,36 @@ class UserController extends Controller
             'new_password' => 'required|min:8',
         ]);
 
-        $user = User::where('username', session('username'))->first();
+        $user = Auth::user();
 
         if(Hash::check($input['old_password'], $user->password)) {
-            $user->password = Hash::make($input['new_password']);
+            $user->password = $input['new_password'];
             $user->save();
 
             return redirect('profile')->with('success', 'You have successfully changed your password');
         }
         else{
-            return redirect('profile')->with('error', 'You old password is incorrect');
+            return redirect('profile')->with('error', 'Your old password is incorrect');
         }
+    }
+
+    public function redirectToGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function handleGoogleCallback()
+    {
+        $googleUser = Socialite::driver('google')->user();
+        
+        $user = User::where('email', $googleUser->email)->first();
+        
+        if ($user) {
+            Auth::login($user);
+        } else {
+            return redirect('/register')->with('error', 'No account found with this Google email. Please register first.');
+        }
+        
+        return redirect('/profile');
     }
 }

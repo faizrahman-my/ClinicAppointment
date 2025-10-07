@@ -10,12 +10,14 @@
                 <li class="nav-item ps-lg-3">
                     <a class="nav-link @yield('about-active')" href="{{ URL::to('/about') }}">About</a>
                 </li>
-                @if (session('sa') !== null && session('sa') === 0 && !session()->has('a'))
-                    <li class="nav-item ps-lg-3">
-                        <a class="nav-link @yield('appointment-active')" href="{{ URL::to('/appointment/reserve') }}">Make
-                            Appointment</a>
-                    </li>
-                @endif
+                @auth
+                    @if (Auth::user()->is_superadmin == 0 && !Auth::user()->staff)
+                        <li class="nav-item ps-lg-3">
+                            <a class="nav-link @yield('appointment-active')" href="{{ URL::to('/appointment/reserve') }}">Make
+                                Appointment</a>
+                        </li>
+                    @endif
+                @endauth
                 <li class="nav-item ps-lg-3">
                     <a class="nav-link @yield('service-active')" href="{{ URL::to('/service') }}">Services</a>
                 </li>
@@ -30,40 +32,38 @@
                         aria-haspopup="true" aria-expanded="false"></a>
                     <div class="dropdown-menu">
 
-                        @if (session()->has('username'))
+                        @auth
                             <a class="dropdown-item @yield('account-active')"
-                                href="{{ URL::to('/profile') }}">{{ ucwords(session('username')) }}</a>
-                        @endif
+                                href="{{ URL::to('/profile') }}">{{ ucwords(Auth::user()->username) }}</a>
 
-                        @if (session('sa') == 1)
-                            <a class="dropdown-item @yield('manageuser-active')" href="{{ URL::to('/users') }}">Manage User</a>
-                        @endif
-
-                        @if (session('sa') !== null && session('sa') === 0 && !session()->has('a'))
-                            <a class="dropdown-item @yield('myappointment-active')" href="{{ URL::to('/appointment') }}">My
-                                Appointment</a>
-                        @endif
-
-                        @if (session()->has('staff'))
-                            @if (session('a') == 1)
-                                <a class="dropdown-item @yield('staff-appointment-active')"
-                                    href="{{ URL::to('appointment/admin') }}">Appointment</a>
-                            @else
-                                <a class="dropdown-item @yield('staff-appointment-active')"
-                                    href="{{ URL::to('appointment/doctor') }}">Appointment</a>
+                            @if (Auth::user()->is_superadmin == 1)
+                                <a class="dropdown-item @yield('manageuser-active')" href="{{ URL::to('/users') }}">Manage User</a>
                             @endif
-                        @endif
 
-                        @if (session()->has('username'))
+                            @if (Auth::user()->is_superadmin == 0 && !Auth::user()->staff)
+                                <a class="dropdown-item @yield('myappointment-active')" href="{{ URL::to('/appointment') }}">My
+                                    Appointment</a>
+                            @endif
+
+                            @if (Auth::user()->staff)
+                                @if (Auth::user()->staff->is_admin == 1)
+                                    <a class="dropdown-item @yield('staff-appointment-active')"
+                                        href="{{ URL::to('appointment/admin') }}">Appointment</a>
+                                @else
+                                    <a class="dropdown-item @yield('staff-appointment-active')"
+                                        href="{{ URL::to('appointment/doctor') }}">Appointment</a>
+                                @endif
+                            @endif
+
                             <form action="{{ URL::to('logout') }}" method="post">
                                 @method('post')
                                 @csrf
                                 <button type="submit" class="dropdown-item">Sign Out</button>
                             </form>
-                        @endif
-                        @if (!session()->has('username'))
+                        @endauth
+                        @guest
                             <a class="dropdown-item @yield('login-active')" href="{{ URL::to('/login') }}">Sign In</a>
-                        @endif
+                        @endguest
 
                     </div>
                 </li>

@@ -64,22 +64,36 @@ class ClinicController extends Controller
     {
         $doctor_list = array(
             array(
-                "name" => "John Doe",
-                "role" => "Developer",
-                "email" => "john.doe@example.com",
-                "image" => "toh.jpg"
+                "name" => "Dr Azril Arrifin",
+                "education"=> "MB CHB (UEUK),
+                MRCP (RCPUK)",
+                "specialist"=> "General Paediatrics
+                Neonatology",
+                "role" => "Resident Doctor",
+                "email" => "Azril@email.com",
+                "branch"=> "Petaling Jaya",
+                "image" => "DrAzril3.jpg"
             ),
             array(
-                "name" => "Jane Smith",
-                "role" => "Designer",
-                "email" => "jane.smith@example.com",
-                "image" => "toh.jpg"
+                "name" => "Dr Farah Leong",
+                "education"=> "MBBCH (WALES), MRCP (UK),
+                FRCP (EDIN)",
+                "specialist"=> "General Paediatrics
+                Paediatric Respiratory Medicine",
+                "role" => "Resident Doctor",
+                "email" => "Farah@email.com",
+                "branch"=> "Gombak",
+                "image" => "dr.farah.jpg"
             ),
             array(
-                "name" => "Mike Johnson",
-                "role" => "Manager",
-                "email" => "mike.johnson@example.com",
-                "image" => "toh.jpg"
+                "name" => "Dr Wahab Rashid",
+                "education"=> "MBBS (UM),
+                M.MED (ANAES) (UKM)",
+                "specialist"=> "Anaesthesiology and Critical Care",
+                "role" => "Resident Doctor",
+                "email" => "Wahab@email.com",
+                "branch"=> "Klang",
+                "image" => "Dr.Wahab.jpg"
             )
         );
         return view('pages.doctor', compact('doctor_list'));

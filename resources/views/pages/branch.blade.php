@@ -8,7 +8,8 @@
 
 @section('content')
 
-    <section class="py-5 mb-md-5 mt-2 mx-3 bg-opacity-50" style="background-image: url('{{ asset('/assets/img/tah.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+    <section class="py-5 mb-md-5 mt-2 mx-3 bg-opacity-50"
+        style="background-image: url('{{ asset('/assets/img/tah.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
         <div class="container">
             <div class="row text-white py-4">
                 <div class="col-lg-8">
@@ -20,7 +21,7 @@
     </section>
 
 
-    <div class="container py-4">
+    <div class="container py-4 bg-secondary mb-5">
 
         <div class="row">
             <div class="col-md-3">
@@ -30,17 +31,26 @@
                     <a class="nav-link mb-3 p-3 shadow active" id="v-pills-home-tab" data-bs-toggle="pill"
                         href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">
                         <i class="fa fa-user-circle-o mr-2"></i>
-                        <span class="small text-uppercase">Petaling Jaya</span></a>
+                        <span class="small text-uppercase">Petaling Jaya</span>
+                        <p style="color: rgb(0, 162, 255)" class="mt-2">Tel: 019-668 3294</p>
+
+                    </a>
 
                     <a class="nav-link mb-3 p-3 shadow" id="v-pills-profile-tab" data-bs-toggle="pill"
                         href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">
                         <i class="fa fa-calendar-minus-o mr-2"></i>
-                        <span class="small text-uppercase">GOMBAK</span></a>
+                        <span class="small text-uppercase">GOMBAK</span>
+                        <p style="color: rgb(0, 162, 255)" class="mt-2">Tel: 011-5414 1500</p>
+                    </a>
+                        
+                        
 
                     <a class="nav-link mb-3 p-3 shadow" id="v-pills-messages-tab" data-bs-toggle="pill"
                         href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">
                         <i class="fa fa-star mr-2"></i>
-                        <span class="small text-uppercase">KLANG</span></a>
+                        <span class="small text-uppercase">KLANG</span>
+                        <p style="color: rgb(0, 162, 255)" class="mt-2">Tel: 017-372 8032</p>
+                    </a>
 
 
                 </div>

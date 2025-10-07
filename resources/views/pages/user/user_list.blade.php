@@ -36,40 +36,14 @@
             <table class="table table-striped table-bordered" id="mytable">
                 <thead>
                     <tr>
-                        <th>name</th>
-                        <th>username</th>
-                        <th>email</th>
-                        <th>branch</th>
-                        <th>role</th>
-                        <th>option</th>
+                        <th>Name</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Branch</th>
+                        <th>Role</th>
+                        <th>Option</th>
                     </tr>
                 </thead>
-                <tbody>
-                    @foreach ($user_list as $user)
-                        <tr>
-                            <td>{{ $user['name'] }}</td>
-                            <td>{{ $user['username'] }}</td>
-                            <td>{{ $user['email'] }}</td>
-                            <td>{{ $user['branch'] }}</td>
-                            <td><span class="badge bg-secondary text-dark me-3">{{ $user['role'] }}</span></td>
-                            <td>
-                                @if ($user['staff_status'] == 1)
-                                    <a href="{{ URL::to('users') }}/{{ $user['staff_id'] }}?menu=disable"
-                                        class="btn btn-danger btn-sm badge">disable</a>
-                                @elseif ($user['staff_status'] == 0)
-                                    <a href="{{ URL::to('users') }}/{{ $user['staff_id'] }}?menu=enable"
-                                        class="btn btn-success btn-sm badge">enable</a>
-                                @endif
-                                <a href="{{ URL::to('users') }}/{{ $user['id'] }}?menu=reset"
-                                    class="btn btn-warning btn-sm badge">reset</a>
-                                <a href="{{ URL::to('users') }}/{{ $user['id'] }}?menu=remove"
-                                    class="btn btn-primary btn-sm badge">delete</a>
-                            </td>
-                        </tr>
-                    @endforeach
-
-                </tbody>
-
             </table>
 
 
@@ -127,6 +101,7 @@
 
                                 <select name="branch"
                                     class="form-select form-control @error('branch')is-invalid @enderror">
+                                    <option value="">Select Branch</option>
                                     @foreach ($clinic_list as $clinic)
                                         <option value="{{ $clinic->id }}">{{ $clinic->branch }}</option>
                                     @endforeach
@@ -144,6 +119,7 @@
 
                                 <select name="role"
                                     class="form-select form-control @error('role')is-invalid @enderror">
+                                    <option value="">Select Role</option>
                                     <option value="0">Doctor</option>
                                     <option value="1">Admin</option>
                                 </select>
@@ -223,6 +199,18 @@
         </div>
     </div>
 
+    <!-- Toast Container -->
+    <div class="toast-container position-fixed top-0 end-0 p-3">
+        <div id="actionToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto"></strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body" id="toastMessage">
+                Action completed successfully!
+            </div>
+        </div>
+    </div>
 
 @endsection
 
@@ -233,16 +221,65 @@
     <script src="https://cdn.datatables.net/2.0.7/js/dataTables.js"></script>
     <script>
         $(document).ready(function() {
-
             $('#mytable').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true
+                processing: true,
+                serverSide: false,
+                responsive: true,
+                ajax: '{{ route('users-list') }}',
+                columns: [
+                    {data: 'name', name: 'name'},
+                    {data: 'username', name: 'username'},
+                    {data: 'email', name: 'email'},
+                    {data: 'branch', name: 'branch', orderable: false, searchable: false},
+                    {
+                        data: 'role', 
+                        name: 'role', 
+                        orderable: false, 
+                        searchable: false,
+                        render: function(data, type, row) {
+                            return '<span class="badge bg-secondary text-dark me-3">' + data + '</span>';
+                        }
+                    },
+                    {
+                        data: 'option', 
+                        name: 'option', 
+                        orderable: false, 
+                        searchable: false,
+                        render: function(data, type, row) {
+                            let buttons = '';
+                            if (data.staff_id) {
+                                if (data.is_staff == 1) {
+                                    buttons += '<button class="btn btn-danger btn-sm badge action-btn" data-action="disable" data-id="' + data.staff_id + '">disable</button> ';
+                                } else {
+                                    buttons += '<button class="btn btn-success btn-sm badge action-btn" data-action="enable" data-id="' + data.staff_id + '">enable</button> ';
+                                }
+                            }
+                            buttons += '<button class="btn btn-warning btn-sm badge action-btn" data-action="reset" data-id="' + data.user_id + '">reset</button>';
+                            return buttons;
+                        }
+                    }
+                ]
             });
+
+            $(document).on('click', '.action-btn', function(e) {
+                e.preventDefault();
+                const action = $(this).data('action');
+                const id = $(this).data('id');
+                
+                $.ajax({
+                    url: '{{ URL::to('users') }}/' + id + '?menu=' + action,
+                    type: 'GET',
+                    success: function(response) {
+                        $('#mytable').DataTable().ajax.reload();
+                        $('#toastMessage').text(action === 'disable' ? 'User disabled successfully!' : action === 'enable' ? 'User enabled successfully!' : 'Password reset successfully!');
+                        new bootstrap.Toast(document.getElementById('actionToast')).show();
+                    },
+                    error: function(xhr) {
+                        console.warn('Error: ' + xhr.responseText);
+                    }
+                });
+            });
+
         });
     </script>
 

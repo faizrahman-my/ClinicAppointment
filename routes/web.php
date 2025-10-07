@@ -29,14 +29,18 @@ Route::get('branch', [ClinicController::class, 'branch']);
 //db
 Route::get('login', [UserController::class, 'index'])->middleware('clinic.web');
 Route::post('login', [UserController::class, 'redirectLoginUser'])->middleware('clinic.web');
+Route::get('auth/google', [UserController::class, 'redirectToGoogle'])->name('google.login');
+Route::get('auth/google/callback', [UserController::class, 'handleGoogleCallback']);
 Route::get('register', [UserController::class, 'register'])->middleware('clinic.web');
 Route::post('register', [UserController::class, 'createNewAccount'])->middleware('clinic.web');
 Route::get('profile', [UserController::class, 'profile'])->middleware('clinic.user');
 Route::put('profile', [UserController::class, 'updateProfile'])->middleware('clinic.user');
 Route::put('profile/password', [UserController::class, 'changePassword'])->middleware('clinic.user');
 Route::post('logout', [UserController::class, 'logout']);
+Route::get('logout', [UserController::class, 'logout']);
 
 Route::get('users', [AdminController::class, 'index'])->middleware('clinic.superadmin');
+Route::get('users-list', [AdminController::class, 'userList'])->name('users-list')->middleware('clinic.superadmin');
 Route::get('users/{id}', [AdminController::class, 'manageUser'])->middleware('clinic.superadmin');
 Route::post('users', [AdminController::class, 'createStaffAccount'])->middleware('clinic.superadmin');
 Route::post('branch', [AdminController::class, 'createClinicBranch'])->middleware('clinic.superadmin');

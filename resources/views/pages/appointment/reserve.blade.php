@@ -33,7 +33,7 @@
                             @method('post')
                             @csrf
 
-                            <input type="hidden" name="username" value="{{ session('username') }}" autocomplete="off">
+                            <input type="hidden" name="username" value="{{ Auth::user()->username }}" autocomplete="off">
 
                             <div class="form-floating mb-3 has-danger">
                                 <input value="" type="date" name="appointment_date"
@@ -52,6 +52,7 @@
 
                                 <select name="appointment_time"
                                     class="form-select form-control @error('appointment_time')is-invalid @enderror">
+                                    <option value="">Select Time</option>
                                     @foreach ($time_list as $time)
                                         <option>{{ $time }}</option>
                                     @endforeach
@@ -70,6 +71,7 @@
 
                                 <select name="service_type"
                                     class="form-select form-control @error('service_type')is-invalid @enderror">
+                                    <option value="">Select Service</option>
                                     @foreach ($service_list as $service)
                                         <option value="{{ $service }}">{{ $service }}</option>
                                     @endforeach
@@ -87,6 +89,7 @@
 
                                 <select name="clinic_branch"
                                     class="form-select form-control @error('clinic_branch')is-invalid @enderror">
+                                    <option value="">Select Clinic Branch</option>
                                     @foreach ($clinic_list as $clinic)
                                         <option value="{{ $clinic->id }}">{{ $clinic->branch }}</option>
                                     @endforeach

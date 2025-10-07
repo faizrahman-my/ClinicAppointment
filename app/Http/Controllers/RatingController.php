@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Rating;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\Console\Input\Input;
 
 class RatingController extends Controller
@@ -12,11 +13,10 @@ class RatingController extends Controller
     //
     public function create(Request $request, $id) {
 
-        $user = User::where('username', session('username'))->first();
         $input = $request->validate([
             'feedback' => 'required',
         ]);
-        $feedbackData = ['feedback' => $input['feedback'], 'user_id' => $user->id, 'appointment_id' => base64_decode($id)];
+        $feedbackData = ['feedback' => $input['feedback'], 'user_id' => Auth::id(), 'appointment_id' => base64_decode($id)];
         $feedback = Rating::create($feedbackData);
         return redirect('appointment/detail/'.$id);
     }

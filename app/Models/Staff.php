@@ -15,4 +15,9 @@ class Staff extends Model
         'is_admin',
         'is_staff'
     ];
+
+    public function clinic()
+    {
+        return $this->belongsTo(Clinic::class);
+    }
 }
